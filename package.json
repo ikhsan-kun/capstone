@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "webpack serve",
-    "build": "webpack"
+    "start-dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "start-common": "webpack --config webpack.common.js"
   },
   "keywords": [],
   "author": "",
