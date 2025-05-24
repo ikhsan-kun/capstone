@@ -38,6 +38,7 @@
     "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.21",
     "bootstrap": "^5.3.5",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2"
   }
 }

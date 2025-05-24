@@ -22,7 +22,7 @@ class HomeView {
     `;
   }
   async afterRender() {
-    // Kosongkan atau tambahkan kode jika perlu
+    
   }
 }
 export default HomeView;

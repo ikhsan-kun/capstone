@@ -31,49 +31,49 @@ export default class LoginPage {
     `;
   }
 
-  async afterRender() {
-    this.#presenter = new LoginPresenter({
-      view: this,
-      model: StoryApi,
-      authModel: AuthModel,
-    });
+  // async afterRender() {
+  //   this.#presenter = new LoginPresenter({
+  //     view: this,
+  //     model: StoryApi,
+  //     authModel: AuthModel,
+  //   });
 
-    this.#setupForm();
-  }
+  //   this.#setupForm();
+  // }
 
-  #setupForm() {
-    document.getElementById('login-form').addEventListener('submit', async (event) => {
-      event.preventDefault();
+  // #setupForm() {
+  //   document.getElementById('login-form').addEventListener('submit', async (event) => {
+  //     event.preventDefault();
 
-      const data = {
-        email: document.getElementById('email-input').value,
-        password: document.getElementById('password-input').value,
-      };
-      await this.#presenter.getLogin(data);
-    });
-  }
+  //     const data = {
+  //       email: document.getElementById('email-input').value,
+  //       password: document.getElementById('password-input').value,
+  //     };
+  //     await this.#presenter.getLogin(data);
+  //   });
+  // }
 
-  loginSuccessfully(message) {
-    console.log(message);
+  // loginSuccessfully(message) {
+  //   console.log(message);
 
-    location.hash = '/';
-  }
+  //   location.hash = '/';
+  // }
 
-  loginFailed(message) {
-    alert(message);
-  }
+  // loginFailed(message) {
+  //   alert(message);
+  // }
 
-  showSubmitLoadingButton() {
-    document.getElementById('submit-button-container').innerHTML = `
-      <button class="btn" type="submit" disabled>
-        <i class="fas fa-spinner loader-button"></i> Masuk
-      </button>
-    `;
-  }
+  // showSubmitLoadingButton() {
+  //   document.getElementById('submit-button-container').innerHTML = `
+  //     <button class="btn" type="submit" disabled>
+  //       <i class="fas fa-spinner loader-button"></i> Masuk
+  //     </button>
+  //   `;
+  // }
 
-  hideSubmitLoadingButton() {
-    document.getElementById('submit-button-container').innerHTML = `
-      <button class="btn" type="submit">Masuk</button>
-    `;
-  }
+  // hideSubmitLoadingButton() {
+  //   document.getElementById('submit-button-container').innerHTML = `
+  //     <button class="btn" type="submit">Masuk</button>
+  //   `;
+  // }
 }
