@@ -1,13 +1,27 @@
-export async function loginUser({ email, password }) {
-  const response = await fetch('http://localhost:3000/auth/login', {
+import CONFIG from '../config';
+
+const ENDPOINTS = {
+  LOGIN: `${CONFIG.BASE_URL}/auth/login`,
+  REGISTER: `${CONFIG.BASE_URL}/auth/register`,
+};
+
+// Login user
+export async function loginUser(credentials) {
+  const response = await fetch(ENDPOINTS.LOGIN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(credentials),
   });
-  const data = await response.json();
-  // Agar sesuai dengan login-presenter.js, tambahkan loginResult jika login sukses
-  if (!data.error && data.token) {
-    return { ...data, loginResult: { token: data.token } };
-  }
-  return data;
+  return await response.json();
 }
+
+// Register user
+export async function registerUser(data) {
+  const response = await fetch(ENDPOINTS.REGISTER, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
+

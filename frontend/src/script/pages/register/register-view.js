@@ -1,5 +1,5 @@
-import RegisterPresenter from './register-presenter';
-import * as StoryApi from '../../data/api';
+import RegisterPresenter from "./register-presenter";
+import * as nutriai from "../../data/api";
 
 export default class RegisterPage {
   #presenter = null;
@@ -34,49 +34,51 @@ export default class RegisterPage {
     `;
   }
 
-  // async afterRender() {
-  //   this.#presenter = new RegisterPresenter({
-  //     view: this,
-  //     model: StoryApi,
-  //   });
+  async afterRender() {
+    this.#presenter = new RegisterPresenter({
+      view: this,
+      model: nutriai,
+    });
 
-  //   this.#setupForm();
-  // }
+    this.#setupForm();
+  }
 
-  // #setupForm() {
-  //   document.getElementById('register-form').addEventListener('submit', async (event) => {
-  //     event.preventDefault();
+  #setupForm() {
+    document
+      .getElementById("register-form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-  //     const data = {
-  //       name: document.getElementById('name-input').value,
-  //       email: document.getElementById('email-input').value,
-  //       password: document.getElementById('password-input').value,
-  //     };
-  //     await this.#presenter.getRegistered(data);
-  //   });
-  // }
+        const data = {
+          username: document.getElementById("name-input").value,
+          email: document.getElementById("email-input").value,
+          password: document.getElementById("password-input").value,
+        };
+        await this.#presenter.getRegistered(data);
+      });
+  }
 
-  // registeredSuccessfully(message) {
-  //   console.log(message);
+  registeredSuccessfully(message, user) {
+    console.log(message);
+    console.log(user); // opsional
+    location.hash = "/login";
+  }
 
-  //   location.hash = '/login';
-  // }
+  registeredFailed(message) {
+    alert(message);
+  }
 
-  // registeredFailed(message) {
-  //   alert(message);
-  // }
+  showSubmitLoadingButton() {
+    document.getElementById("submit-button-container").innerHTML = `
+      <button class="btn" type="submit" disabled>
+        <i class="fas fa-spinner loader-button"></i> Daftar akun
+      </button>
+    `;
+  }
 
-  // showSubmitLoadingButton() {
-  //   document.getElementById('submit-button-container').innerHTML = `
-  //     <button class="btn" type="submit" disabled>
-  //       <i class="fas fa-spinner loader-button"></i> Daftar akun
-  //     </button>
-  //   `;
-  // }
-
-  // hideSubmitLoadingButton() {
-  //   document.getElementById('submit-button-container').innerHTML = `
-  //     <button class="btn" type="submit">Daftar akun</button>
-  //   `;
-  // }
+  hideSubmitLoadingButton() {
+    document.getElementById("submit-button-container").innerHTML = `
+      <button class="btn" type="submit">Daftar akun</button>
+    `;
+  }
 }

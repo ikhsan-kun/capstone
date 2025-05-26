@@ -1,0 +1,6 @@
+.custom-btn:hover,
+.custom-btn:focus {
+  background-color: orange !important;
+  color: #fff !important;
+  border-color: orange !important;
+}

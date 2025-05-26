@@ -1,6 +1,6 @@
-const { registerUser, validateUser } = require('../../services/userService');
-const { generateToken } = require('../../utils/jwt');
-const { registerSchema } = require('./validator');
+const { registerUser, validateUser } = require("../../services/userService");
+const { generateToken } = require("../../utils/jwt");
+const { registerSchema } = require("./validator");
 
 const registerHandler = async (request, h) => {
   try {
@@ -8,7 +8,7 @@ const registerHandler = async (request, h) => {
     if (error) return h.response({ error: error.message }).code(400);
 
     const user = await registerUser(request.payload);
-    return h.response({ message: 'User registered', user }).code(201);
+    return h.response({ message: "User registered", user }).code(201);
   } catch (err) {
     return h.response({ error: err.message }).code(400);
   }
@@ -19,7 +19,7 @@ const loginHandler = async (request, h) => {
     const user = await validateUser(request.payload);
     const token = generateToken({ id: user.id, username: user.username });
 
-    return h.response({ message: 'Login success', token }).code(200);
+    return h.response({ message: "Login success", loginResult: { token } }).code(200);
   } catch (err) {
     return h.response({ error: err.message }).code(401);
   }

@@ -6,12 +6,23 @@ const init = async () => {
   const server = Hapi.server({
     port: 3000,
     host: "localhost",
+    routes: {
+      cors: {
+        origin: ["http://localhost:8080"],
+        credentials: true,
+      },
+    },
   });
 
   server.route(authRoutes);
 
   await server.start();
-  console.log(`Server running at: ${server.info.uri}`);
+  console.log("Server running on %s", server.info.uri);
 };
+
+process.on("unhandledRejection", (err) => {
+  console.log(err);
+  process.exit(1);
+});
 
 init();
