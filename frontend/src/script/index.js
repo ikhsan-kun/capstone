@@ -1,5 +1,6 @@
 require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
+import '../style/style.css';
 import App from './pages/app';
 import * as AuthModel from './utils/auth';
 

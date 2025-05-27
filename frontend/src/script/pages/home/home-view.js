@@ -66,10 +66,10 @@ class HomeView {
             </div>
           </div>
           <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="../public/images/image-10.png" alt="img nutri ai" style="position:absolute; top: 180px; right: 550px; width: 130px; height: 150px;">
-            <img src="../public/images/image-20.png" alt="image-10" style="position:absolute; top: 300px; right: 0; width: 70px; height: 200px;">
+            <img src="images/image-10.png" alt="img nutri ai" style="position:absolute; top: 180px; right: 550px; width: 130px; height: 150px;">
+            <img src="images/image-20.png" alt="image-10" style="position:absolute; top: 300px; right: 0; width: 70px; height: 200px;">
             <img
-              src="../public/images/bottom-img1.png" 
+              src="images/bottom-img1.png" 
               alt="NutriAi Image"
               width="500px"
               height="460px"
