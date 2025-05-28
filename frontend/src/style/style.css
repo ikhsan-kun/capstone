@@ -4,3 +4,20 @@
   color: #fff !important;
   border-color: orange !important;
 }
+.hero-img-group img {
+  max-width: 150px;
+  height: auto;
+  margin: 0 10px 10px 0;
+}
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+  .hero-img-group {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .hero-img-group img {
+    max-width: 100px;
+  }
+}
