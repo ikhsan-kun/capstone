@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .custom-btn:hover,
 .custom-btn:focus {
   background-color: orange !important;

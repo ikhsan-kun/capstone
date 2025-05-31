@@ -1,43 +1,10 @@
-class HomeView {
-  constructor() {
-    this.app = document.getElementById("main-content");
-  }
+import HomePresenter from './home-presenter'
+
+export default class HomeView {
+   #presenter = null;
 
   async render() {
-    return `
-       <nav class="navbar navbar-expand-lg" style="background-color: #fff">
-      <div class="container">
-        <h3 class="navbar-brand">NutriAi</h3>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Disabled</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div
+    return `<div
       id="home"
       class="container-fluid pt-5"
       style="
@@ -59,7 +26,7 @@ class HomeView {
             </p>
             <div>
               <a
-                href="/upload"
+                href="#/analyzer"
                 class="btn btn-outline-dark rounded-5 custom-btn"
                 style="
                   background: transparent;
@@ -76,9 +43,8 @@ class HomeView {
             class="col-md-6 d-flex flex-column align-items-center hero-img-group"
             style="min-height: 400px"
           >
-            <!-- Gambar absolut, path sudah benar -->
             <img
-              src="../public/images/image-10.png"
+              src="images/image-10.png"
               alt="img nutri ai"
               style="
                 position: absolute;
@@ -92,12 +58,12 @@ class HomeView {
               class="d-none d-md-block"
             />
             <img
-              src="../public/images/image-20.png"
+              src="images/image-20.png"
               alt="image-20"
               style="
                 position: absolute;
                 top: 20%;
-                right: 0;
+                right: -10px;
                 width: 80px;
                 height: 200px;
                 z-index: 2;
@@ -107,7 +73,7 @@ class HomeView {
             />
             <!-- Gambar utama tetap di tengah -->
             <img
-              src="../public/images/bottom-img1.png"
+              src="images/bottom-img1.png"
               alt="NutriAi Image"
               style="
                 width: 70%;
@@ -122,12 +88,12 @@ class HomeView {
             <!-- Versi mobile: gambar absolut jadi inline -->
             <div class="w-100 d-flex justify-content-between d-md-none mt-3">
               <img
-                src="../public/images/image-10.png"
+                src="images/image-10.png"
                 alt="img nutri ai"
                 style="width: 80px; height: 90px"
               />
               <img
-                src="../public/images/image-20.png"
+                src="images/image-20.png"
                 alt="image-20"
                 style="width: 50px; height: 80px"
               />
@@ -155,7 +121,7 @@ class HomeView {
             data-aos="zoom-out-right"
           >
             <img
-              src="../public/images/image-item1-removebg-preview.png"
+              src="images/image-item1-removebg-preview.png"
               alt="NutriAi Image"
               class="img-fluid mb-3"
               style="max-width: 350px"
@@ -181,7 +147,7 @@ class HomeView {
             data-aos="zoom-out-left"
           >
             <img
-              src="../public/images/image-item0-removebg-preview.png"
+              src="images/image-item0-removebg-preview.png"
               alt="NutriAi Image"
               class="img-fluid mb-3"
               style="max-width: 457px"
@@ -234,7 +200,7 @@ class HomeView {
           </div>
           <div class="col-lg-6 col-md-12 text-center" data-aos="fade-left">
             <img
-              src="../public/images/undraw_teaching_58yg.svg"
+              src="images/undraw_teaching_58yg.svg"
               alt="Nutrition Insights Illustration"
               class="img-fluid"
               style="max-width: 500px; width: 100%"
@@ -252,7 +218,7 @@ class HomeView {
       id="features"
     >
       <div class="container text-center">
-        <div class="row text-center">
+        <div class="row text-center" data-aos="fade-up" data-aos-delay="300">
           <h4 style="font-weight: bold">KNOW MORE ABOUT LIFE!</h4>
           <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem">
             Personalisasi Gaya Hidup
@@ -264,63 +230,354 @@ class HomeView {
         </div>
         <div class="row justify-content-center mt-5 g-4">
           <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100">
+            <div
+              class="card h-100"
+              data-aos="zoom-in-down"
+              data-aos-delay="300"
+            >
               <img
-                src="../public/images/Team spirit-amico.svg"
+                src="images/Team spirit-amico.svg"
                 class="card-img-top"
                 alt="..."
                 style="height: 220px; object-fit: contain"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Heredity</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card’s content.
+                  Warisan gen dari orang tua yang memepengaruhi resiko penyakit
+                  tertentu seperti diabetes, jantung, dan kanker.
                 </p>
-                
               </div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100">
+            <div
+              class="card h-100"
+              data-aos="zoom-in-down"
+              data-aos-delay="300"
+            >
               <img
-                src="../public/images/Team spirit-pana.svg"
+                src="images/Team spirit-pana.svg"
                 class="card-img-top"
                 alt="..."
                 style="height: 220px; object-fit: contain"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Lifestyle</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card’s content.
+                  termasuk pola makan , aktivitas fisik, tidur, dan kebiasaan
+                  sehari-hari yang mempengaruhi kesehatan secara keseluruhan.
                 </p>
-                
               </div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100">
+            <div
+              class="card h-100"
+              data-aos="zoom-in-down"
+              data-aos-delay="300"
+            >
               <img
-                src="../public/images/Healthy lifestyle-pana.svg"
+                src="images/Healthy lifestyle-pana.svg"
                 class="card-img-top"
                 alt="..."
                 style="height: 220px; object-fit: contain"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Environment</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card’s content.
+                  Lingkungan tempat tinggal, termasuk polusi, akses ke layanan
+                  kesehatan, dan kondisi sosial ekonomi yang dapat mempengaruhi
+                  kesehatan.
                 </p>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div
+        class="container text-center py-5 align-items-center"
+        style="height: max-content; position: relative"
+      >
+        <img
+          src="images/relative0.png"
+          alt=""
+          srcset=""
+          width="50px"
+          style="
+            position: absolute;
+            top: 0;
+            left: 100px;
+            z-index: 2;
+            transform: rotate(180deg);
+          "
+        />
+        <img
+          src="images/relative0.png"
+          alt=""
+          srcset=""
+          width="50px"
+          style="
+            position: absolute;
+            top: 3rem;
+            right: 100px;
+            z-index: 2;
+            transform: rotate(90deg);
+          "
+        />
+
+        <h2
+          style="font-size: 2rem; font-weight: bold; margin-bottom: 3rem"
+          data-aos="fade-up"
+        >
+          Manfaat yang di perhitungkan dari <br />
+          Setiap Makanan
+        </h2>
+        <div class="row justify-content-center g-4">
+          <div class="col-12 col-md-6">
+            <div
+              class="card mb-3 h-100"
+              style="max-width: 540px; margin: 0 auto"
+              data-aos="fade-right"
+            >
+              <div class="row g-0">
+                <div
+                  class="col-md-4"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <img
+                    src="images/image-80.png"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div
+              class="card mb-3 h-100"
+              style="max-width: 540px; margin: 0 auto"
+              data-aos="fade-left"
+            >
+              <div class="row g-0">
+                <div
+                  class="col-md-4"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <img
+                    src="images/icons-8-we-can-do-it-48-10.png"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div
+              class="card mb-3 h-100"
+              style="max-width: 540px; margin: 0 auto"
+              data-aos="fade-right"
+            >
+              <div class="row g-0">
+                <div
+                  class="col-md-4"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <img
+                    src="images/icons-8-courage-50-10.png"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div
+              class="card mb-3 h-100"
+              style="max-width: 540px; margin: 0 auto"
+              data-aos="fade-left"
+            >
+              <div class="row g-0">
+                <div
+                  class="col-md-4"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <img
+                    src="images/image-90.png"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-fluid text-center"
+      style="
+        background-color: #3a4161;
+        color: #fff;
+        min-height: 30vh;
+        position: relative;
+      "
+    >
+      <img
+        src="images/bottom-img0.png"
+        alt=""
+        srcset=""
+        width="150px"
+        style="position: absolute; bottom: 0; right: 0; z-index: 2"
+      />
+      <img
+        src="images/relative0.png"
+        alt=""
+        srcset=""
+        width="50px"
+        style="position: absolute; top: -20px; left: 20px; z-index: 2"
+      />
+
+      <h3 class="mb-4">Feedback Pengguna</h3>
+      <!-- Daftar komentar feedback (dummy) -->
+      <div class="mb-4" id="feedback-list">
+        <!-- <div class="card mx-auto mb-2" style="max-width: 500px">
+            <div class="card-body">
+              <p class="card-text mb-1">
+                Aplikasinya sangat membantu saya memahami nutrisi makanan!
+              </p>
+              <small class="text-muted">- User1</small>
+            </div>
+          </div>
+          <div class="card mx-auto mb-2" style="max-width: 500px">
+            <div class="card-body">
+              <p class="card-text mb-1">UI-nya simpel dan mudah digunakan.</p>
+              <small class="text-muted">- User2</small>
+            </div>
+          </div> -->
+      </div>
+      <button
+        type="button"
+        class="btn btn-outline-light rounded-5 custom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#feedbackModal"
+      >
+        Beri Feedback
+      </button>
+    </div>
+    <!-- Modal Feedback -->
+    <div
+      class="modal fade"
+      id="feedbackModal"
+      tabindex="-1"
+      aria-labelledby="feedbackModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="feedbackModalLabel">
+                Kirim Feedback Anda
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Tutup"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="feedbackText" class="form-label">Feedback</label>
+                <textarea
+                  class="form-control"
+                  id="feedbackText"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Batal
+              </button>
+              <button type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>`;
   }
-  async afterRender() {}
+  async afterRender() {
+    this.#presenter = new HomePresenter({
+      view: this,
+      model: StoryApi,
+      authModel: AuthModel,
+    });
+  }
 }
-export default HomeView;
+

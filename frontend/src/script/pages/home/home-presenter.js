@@ -6,10 +6,10 @@ class HomePresenter {
   }
 
   async init() {
-    if (!this.authService.isLoggedIn()) {
-      window.location.href = '#/login'; // Redirect ke halaman login jika belum login
-      return;
-    }
+    // if (!this.authService.isLoggedIn()) {
+    //   window.location.href = '#/login'; // Redirect ke halaman login jika belum login
+    //   return;
+    // }
 
     try {
       this.view.render();
