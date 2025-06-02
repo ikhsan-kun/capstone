@@ -1,5 +1,4 @@
 import HomePresenter from './home-presenter'
-import authModel from '../../utils/auth'
 
 export default class HomeView {
    #presenter = null;
@@ -499,22 +498,9 @@ export default class HomeView {
       />
 
       <h3 class="mb-4">Feedback Pengguna</h3>
-      <!-- Daftar komentar feedback (dummy) -->
+      
       <div class="mb-4" id="feedback-list">
-        <!-- <div class="card mx-auto mb-2" style="max-width: 500px">
-            <div class="card-body">
-              <p class="card-text mb-1">
-                Aplikasinya sangat membantu saya memahami nutrisi makanan!
-              </p>
-              <small class="text-muted">- User1</small>
-            </div>
-          </div>
-          <div class="card mx-auto mb-2" style="max-width: 500px">
-            <div class="card-body">
-              <p class="card-text mb-1">UI-nya simpel dan mudah digunakan.</p>
-              <small class="text-muted">- User2</small>
-            </div>
-          </div> -->
+       
       </div>
       <button
         type="button"
@@ -557,6 +543,17 @@ export default class HomeView {
                   required
                 ></textarea>
               </div>
+              <div class="mb-3">
+                <label class="form-label">Rating</label>
+                <div id="feedbackRating" class="d-flex gap-1">
+                  <!-- Bintang rating -->
+                  <span class="star" data-value="1">&#9733;</span>
+                  <span class="star" data-value="2">&#9733;</span>
+                  <span class="star" data-value="3">&#9733;</span>
+                  <span class="star" data-value="4">&#9733;</span>
+                  <span class="star" data-value="5">&#9733;</span>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button
@@ -573,10 +570,77 @@ export default class HomeView {
       </div>
     </div>`;
   }
-  async afterRender() {
-    this.#presenter = new HomePresenter({
-      view: this,
+   async afterRender() {
+    this.#presenter = new HomePresenter({ view: this });
+    this.#presenter.loadFeedback();
+
+    // Bintang rating interaktif di modal
+    const stars = document.querySelectorAll('#feedbackRating .star');
+    let selectedRating = 0;
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        selectedRating = parseInt(this.dataset.value);
+        stars.forEach((s, idx) => {
+          s.style.color = idx < selectedRating ? 'orange' : '#ccc';
+        });
+      });
     });
+
+    // Submit feedback
+    const form = document.querySelector('#feedbackModal form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = document.getElementById('feedbackText').value;
+        if (!selectedRating) {
+          alert('Pilih rating terlebih dahulu!');
+          return;
+        }
+        this.#presenter.submitFeedback(message, selectedRating);
+      });
+    }
+  }
+
+  showLoginMessage() {
+    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    if (feedbackListDiv) {
+      feedbackListDiv.innerHTML = `<div class="alert alert-warning">Anda harus login untuk melihat dan mengirim feedback.</div>`;
+    }
+    const btn = document.querySelector('button[data-bs-target="#feedbackModal"]');
+    if (btn) btn.disabled = true;
+  }
+
+  showFeedbackList(feedback) {
+    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    if (feedbackListDiv) {
+      feedbackListDiv.innerHTML = feedback.map(fb => `
+        <div class="card mx-auto mb-2" style="max-width: 500px">
+          <div class="card-body">
+            <p class="card-text mb-1">${fb.message}</p>
+            <div>
+              ${[...Array(5)].map((_,i) =>
+                `<span style="color:${i<fb.rating?'orange':'#ccc'}">&#9733;</span>`
+              ).join('')}
+            </div>
+            <small class="text-muted">- ${fb.username}</small>
+          </div>
+        </div>
+      `).join('');
+    }
+    const btn = document.querySelector('button[data-bs-target="#feedbackModal"]');
+    if (btn) btn.disabled = false;
+  }
+
+  showFeedbackError() {
+    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    if (feedbackListDiv) {
+      feedbackListDiv.innerHTML = `<div class="alert alert-danger">Gagal memuat feedback.</div>`;
+    }
+  }
+
+  onFeedbackSubmitted() {
+    alert('Feedback berhasil dikirim!');
+    window.location.reload();
   }
 }
 

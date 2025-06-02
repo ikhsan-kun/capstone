@@ -1,4 +1,4 @@
-const { addFeedback, fetchUserFeedback } = require('../../services/feedbackServices');
+const { addFeedback, fetchUserFeedback, fetchAllFeedbackWithUser } = require('../../services/feedbackServices');
 const { feedbackSchema } = require('./validator');
 const { generateToken } = require("../../utils/jwt");
 

@@ -1,6 +1,7 @@
 const {
   submitFeedbackHandler,
   getUserFeedbackHandler,
+  getAllFeedbackHandler
 } = require('./handler');
 
 module.exports = [
@@ -22,8 +23,8 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/admin/feedback',
-    handler: getAllFeedbackAdminHandler,
+    path: '/all/feedback',
+    handler: getAllFeedbackHandler,
     options: {
       auth: 'jwt',
     },

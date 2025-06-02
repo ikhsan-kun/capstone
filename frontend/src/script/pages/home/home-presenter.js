@@ -1,24 +1,36 @@
-class HomePresenter {
-  constructor(view, model, authService) {
+import { fetchAllFeedback, postFeedback } from '../../data/api';
+import { getAccessToken } from '../../utils/auth';
+
+export default class HomePresenter {
+  constructor({ view }) {
     this.view = view;
-    this.model = model;
-    this.authService = authService;
   }
 
-  async init() {
-    // if (!this.authService.isLoggedIn()) {
-    //   window.location.href = '#/login'; // Redirect ke halaman login jika belum login
-    //   return;
-    // }
-
+  async loadFeedback() {
+    const token = getAccessToken();
+    if (!token) {
+      this.view.showLoginMessage();
+      return;
+    }
     try {
-      this.view.render();
-      const data = await this.model.fetchData();
-      this.view.updateContent(data);
-    } catch (error) {
-      alert('Failed to load data: ' + error.message); // Tampilkan pesan error jika gagal
+      const data = await fetchAllFeedback(token);
+      this.view.showFeedbackList(data.feedback || []);
+    } catch (e) {
+      this.view.showFeedbackError();
+    }
+  }
+
+  async submitFeedback(message, rating) {
+    const token = getAccessToken();
+    if (!token) {
+      this.view.showLoginMessage();
+      return;
+    }
+    try {
+      await postFeedback(token, { message, rating });
+      this.view.onFeedbackSubmitted();
+    } catch (e) {
+      this.view.showFeedbackError();
     }
   }
 }
-
-module.exports = HomePresenter;

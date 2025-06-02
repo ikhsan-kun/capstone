@@ -1,7 +1,9 @@
 const Hapi = require("@hapi/hapi");
 const Jwt = require("@hapi/jwt"); // Tambahkan ini
 const authRoutes = require("./api/auth/routes");
+const historyRoutes = require("./api/history/routes");
 const feedbackRoutes = require("./api/feedback/routes");
+
 require("dotenv").config();
 
 const init = async () => {
@@ -25,7 +27,7 @@ const init = async () => {
       return { isValid: true, credentials: artifacts.decoded.payload };
     }
   });
-
+server.route(historyRoutes);
   server.route(feedbackRoutes);
   server.route(authRoutes);
 
