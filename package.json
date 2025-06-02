@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.0",
+    "@hapi/jwt": "^3.2.0",
     "@popperjs/core": "^2.11.8",
     "aos": "^2.3.4",
     "autoprefixer": "^10.4.21",

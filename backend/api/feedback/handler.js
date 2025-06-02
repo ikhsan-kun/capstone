@@ -1,5 +1,6 @@
-const { addFeedback, fetchUserFeedback } = require('../../services/feedbackService');
-const { feedbackSchema } = require('./validators');
+const { addFeedback, fetchUserFeedback } = require('../../services/feedbackServices');
+const { feedbackSchema } = require('./validator');
+const { generateToken } = require("../../utils/jwt");
 
 const submitFeedbackHandler = async (request, h) => {
   const { message, rating } = request.payload;
@@ -26,7 +27,17 @@ const getUserFeedbackHandler = async (request, h) => {
   }
 };
 
+const getAllFeedbackHandler = async (request, h) => {
+  try {
+    const feedback = await fetchAllFeedbackWithUser();
+    return h.response({ feedback }).code(200);
+  } catch (err) {
+    return h.response({ error: err.message }).code(500);
+  }
+};
+
 module.exports = {
   submitFeedbackHandler,
   getUserFeedbackHandler,
+  getAllFeedbackHandler
 };

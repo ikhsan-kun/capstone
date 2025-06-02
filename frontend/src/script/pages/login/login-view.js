@@ -1,5 +1,5 @@
 import LoginPresenter from "./login-presenter";
-import * as StoryApi from "../../data/api";
+import * as api from "../../data/api";
 import * as AuthModel from "../../utils/auth";
 
 export default class LoginPage {
@@ -35,6 +35,7 @@ export default class LoginPage {
     this.#presenter = new LoginPresenter({
       view: this,
       authModel: AuthModel,
+      model: api,
     });
 
     this.#setupForm();

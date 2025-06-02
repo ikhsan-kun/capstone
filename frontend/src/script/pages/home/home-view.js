@@ -1,4 +1,5 @@
 import HomePresenter from './home-presenter'
+import authModel from '../../utils/auth'
 
 export default class HomeView {
    #presenter = null;
@@ -575,8 +576,6 @@ export default class HomeView {
   async afterRender() {
     this.#presenter = new HomePresenter({
       view: this,
-      model: StoryApi,
-      authModel: AuthModel,
     });
   }
 }

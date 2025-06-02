@@ -24,3 +24,10 @@ body {
     max-width: 100px;
   }
 }
+.fade-transition {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.fade-transition.show {
+  opacity: 1;
+}

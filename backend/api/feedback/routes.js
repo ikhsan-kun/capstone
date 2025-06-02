@@ -9,13 +9,21 @@ module.exports = [
     path: '/feedback',
     handler: submitFeedbackHandler,
     options: {
-      auth: 'jwt', // pastikan user login
+      auth: 'jwt', 
     },
   },
   {
     method: 'GET',
     path: '/feedback',
     handler: getUserFeedbackHandler,
+    options: {
+      auth: 'jwt',
+    },
+  },
+  {
+    method: 'GET',
+    path: '/admin/feedback',
+    handler: getAllFeedbackAdminHandler,
     options: {
       auth: 'jwt',
     },

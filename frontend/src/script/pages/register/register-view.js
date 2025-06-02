@@ -42,7 +42,7 @@ export default class RegisterPage {
 
     this.#setupForm();
   }
-
+ 
   #setupForm() {
     document
       .getElementById("register-form")

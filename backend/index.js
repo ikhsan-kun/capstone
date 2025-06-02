@@ -1,4 +1,5 @@
 const Hapi = require("@hapi/hapi");
+const Jwt = require("@hapi/jwt"); // Tambahkan ini
 const authRoutes = require("./api/auth/routes");
 const feedbackRoutes = require("./api/feedback/routes");
 require("dotenv").config();
@@ -14,6 +15,17 @@ const init = async () => {
       },
     },
   });
+
+  await server.register(Jwt);
+
+  server.auth.strategy('jwt', 'jwt', {
+    keys: process.env.JWT_SECRET,
+    verify: { aud: false, iss: false, sub: false, nbf: true, exp: true, maxAgeSec: 86400 },
+    validate: (artifacts, request, h) => {
+      return { isValid: true, credentials: artifacts.decoded.payload };
+    }
+  });
+
   server.route(feedbackRoutes);
   server.route(authRoutes);
 
