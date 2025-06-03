@@ -52,7 +52,7 @@ export function checkUnauthenticatedRouteOnly(page) {
 
 export function checkAuthenticatedRoute(page) {
   const isLogin = !!getAccessToken();
-
+  console.log("saya aktif")
   if (!isLogin) {
     location.hash = '/login';
     return null;

@@ -1,7 +1,7 @@
-import HomePresenter from './home-presenter'
+import HomePresenter from "./home-presenter";
 
 export default class HomeView {
-   #presenter = null;
+  #presenter = null;
 
   async render() {
     return `<div
@@ -203,7 +203,7 @@ export default class HomeView {
               src="images/undraw_teaching_58yg.svg"
               alt="Nutrition Insights Illustration"
               class="img-fluid"
-              style="max-width: 500px; width: 100%"
+              style="max-width: 500px; width: 100%;"
             />
           </div>
         </div>
@@ -566,34 +566,34 @@ export default class HomeView {
               <button type="submit" class="btn btn-primary">Kirim</button>
             </div>
           </form>
-        </div>
+        </div> 
       </div>
     </div>`;
   }
-   async afterRender() {
+  async afterRender() {
     this.#presenter = new HomePresenter({ view: this });
     this.#presenter.loadFeedback();
 
     // Bintang rating interaktif di modal
-    const stars = document.querySelectorAll('#feedbackRating .star');
+    const stars = document.querySelectorAll("#feedbackRating .star");
     let selectedRating = 0;
-    stars.forEach(star => {
-      star.addEventListener('click', function() {
+    stars.forEach((star) => {
+      star.addEventListener("click", function () {
         selectedRating = parseInt(this.dataset.value);
         stars.forEach((s, idx) => {
-          s.style.color = idx < selectedRating ? 'orange' : '#ccc';
+          s.style.color = idx < selectedRating ? "orange" : "#ccc";
         });
       });
     });
 
     // Submit feedback
-    const form = document.querySelector('#feedbackModal form');
+    const form = document.querySelector("#feedbackModal form");
     if (form) {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const message = document.getElementById('feedbackText').value;
+        const message = document.getElementById("feedbackText").value;
         if (!selectedRating) {
-          alert('Pilih rating terlebih dahulu!');
+          alert("Pilih rating terlebih dahulu!");
           return;
         }
         this.#presenter.submitFeedback(message, selectedRating);
@@ -602,44 +602,67 @@ export default class HomeView {
   }
 
   showLoginMessage() {
-    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    const feedbackListDiv =
+      document.querySelectorAll("#feedback-list")[1] ||
+      document.getElementById("feedback-list");
     if (feedbackListDiv) {
-      feedbackListDiv.innerHTML = `<div class="alert alert-warning">Anda harus login untuk melihat dan mengirim feedback.</div>`;
+      feedbackListDiv.innerHTML = `<div class="alert alert-warning" style="z-index :4;">Anda harus login untuk melihat dan mengirim feedback.</div>`;
     }
-    const btn = document.querySelector('button[data-bs-target="#feedbackModal"]');
+    const btn = document.querySelector(
+      'button[data-bs-target="#feedbackModal"]'
+    );
     if (btn) btn.disabled = true;
   }
 
   showFeedbackList(feedback) {
-    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    const feedbackListDiv =
+      document.querySelectorAll("#feedback-list")[1] ||
+      document.getElementById("feedback-list");
     if (feedbackListDiv) {
-      feedbackListDiv.innerHTML = feedback.map(fb => `
+      feedbackListDiv.innerHTML = feedback
+        .map(
+          (fb) => `
         <div class="card mx-auto mb-2" style="max-width: 500px">
           <div class="card-body">
             <p class="card-text mb-1">${fb.message}</p>
             <div>
-              ${[...Array(5)].map((_,i) =>
-                `<span style="color:${i<fb.rating?'orange':'#ccc'}">&#9733;</span>`
-              ).join('')}
+              ${[...Array(5)]
+                .map(
+                  (_, i) =>
+                    `<span style="color:${
+                      i < fb.rating ? "orange" : "#ccc"
+                    }">&#9733;</span>`
+                )
+                .join("")}
             </div>
             <small class="text-muted">- ${fb.username}</small>
           </div>
         </div>
-      `).join('');
+      `
+        )
+        .join("");
     }
-    const btn = document.querySelector('button[data-bs-target="#feedbackModal"]');
+    const btn = document.querySelector(
+      'button[data-bs-target="#feedbackModal"]'
+    );
     if (btn) btn.disabled = false;
   }
 
   showFeedbackError() {
-    const feedbackListDiv = document.querySelectorAll('#feedback-list')[1] || document.getElementById('feedback-list');
+    const feedbackListDiv =
+      document.querySelectorAll("#feedback-list")[1] ||
+      document.getElementById("feedback-list");
     if (feedbackListDiv) {
       feedbackListDiv.innerHTML = `<div class="alert alert-danger">Gagal memuat feedback.</div>`;
     }
   }
 
   onFeedbackSubmitted() {
-    alert('Feedback berhasil dikirim!');
+    Swal.fire({
+      title: "berhasil kirim feedback",
+      icon: "success",
+      draggable: true,
+    });
     window.location.reload();
   }
 }

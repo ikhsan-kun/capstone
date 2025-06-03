@@ -2,9 +2,11 @@ require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
 import '../style/style.css';
 import App from './pages/app';
-import * as AuthModel from './utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import "bootstrap-icons/font/bootstrap-icons";
+// import 'sweetalert2/src/sweetalert2.scss'
 
 AOS.init();
 
@@ -19,11 +21,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   AOS.init();
-  // Tambahkan event listener untuk tombol logout
-  document.body.addEventListener('click', (e) => {
-    if (e.target && e.target.id === 'logout-btn') {
-      AuthModel.getLogout();
-      location.hash = '/login';
-    }
-  });
+ 
 });

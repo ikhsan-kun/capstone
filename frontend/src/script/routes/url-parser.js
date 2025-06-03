@@ -22,7 +22,9 @@ function constructRouteFromSegments(pathSegments) {
 }
 
 function getActivePathname() {
-  return location.hash.replace("#", "") || "/";
+  // Jika hash kosong, kembalikan '/'
+  const hash = location.hash.replace("#", "");
+  return hash === "" ? "/" : hash;
 }
 
 function getActiveRoute() {

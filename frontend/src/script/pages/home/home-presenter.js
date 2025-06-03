@@ -7,7 +7,7 @@ export default class HomePresenter {
   }
 
   async loadFeedback() {
-    const token = getAccessToken();
+    const token = getAccessToken(); 
     if (!token) {
       this.view.showLoginMessage();
       return;
