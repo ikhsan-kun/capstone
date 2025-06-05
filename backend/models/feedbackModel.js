@@ -1,34 +1,41 @@
-const db = require("../config/db");
+const supabase = require('../config/db');
 
+// Ambil semua feedback beserta nama user
 const getAllFeedbackWithUser = async () => {
-  const [rows] = await db.execute(`
-    SELECT 
-      f.id AS feedback_id,
-      f.message,
-      f.rating,
-      f.created_at,
-      u.username
-    FROM feedback f
-    JOIN users u ON f.user_id = u.id
-    ORDER BY f.created_at DESC
-  `);
-  return rows;
+  const { data, error } = await supabase
+    .from('feedback')
+    .select('id:feedback_id, message, rating, created_at, users(username)')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
 };
 
+// Tambahkan feedback baru
 const createFeedback = async (userId, message, rating) => {
-  const [result] = await db.execute(
-    "INSERT INTO feedback (user_id, message, rating) VALUES (?, ?, ?)",
-    [userId, message, rating]
-  );
-  return result.insertId;
+  const { data, error } = await supabase
+    .from('feedback')
+    .insert([{ user_id: userId, message, rating }])
+    .select('id');
+
+  if (error) throw error;
+  return data[0].id;
 };
 
+// Ambil feedback milik user tertentu
 const getUserFeedback = async (userId) => {
-  const [rows] = await db.execute(
-    "SELECT * FROM feedback WHERE user_id = ? ORDER BY created_at DESC",
-    [userId]
-  );
-  return rows;
+  const { data, error } = await supabase
+    .from('feedback')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
 };
 
-module.exports = { createFeedback, getUserFeedback, getAllFeedbackWithUser };
+module.exports = {
+  createFeedback,
+  getUserFeedback,
+  getAllFeedbackWithUser,
+};

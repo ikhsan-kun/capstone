@@ -1,19 +1,25 @@
-const db = require("../config/db");
+const supabase = require('../config/db');
 
+// Fungsi untuk menyimpan history deteksi makanan
 const createHistory = async (userId, food, kalori, protein, lemak, karbo) => {
-  const [result] = await db.execute(
-    "INSERT INTO history (user_id, food, kalori, protein, lemak, karbo) VALUES (?, ?, ?, ?, ?, ?)",
-    [userId, food, kalori, protein, lemak, karbo]
-  );
-  return result.insertId;
+  const { data, error } = await supabase
+    .from('history')
+    .insert([{ user_id: userId, food, kalori, protein, lemak, karbo }])
+    .select('id'); 
+  if (error) throw error;
+  return data[0].id;
 };
 
+// Fungsi untuk mendapatkan riwayat pengguna tertentu
 const getUserHistory = async (userId) => {
-  const [rows] = await db.execute(
-    "SELECT * FROM history WHERE user_id = ? ORDER BY detected_at DESC",
-    [userId]
-  );
-  return rows;
+  const { data, error } = await supabase
+    .from('history')
+    .select('*')
+    .eq('user_id', userId)
+    .order('detected_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
 };
 
 module.exports = { createHistory, getUserHistory };
