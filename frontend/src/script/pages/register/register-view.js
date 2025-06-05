@@ -6,28 +6,43 @@ export default class RegisterPage {
 
   async render() {
     return `
-      <section class="d-flex align-items-center justify-content-center min-vh-100 bg-success bg-gradient">
-        <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4 text-success fw-bold">Daftar Akun</h2>
-            <form id="register-form">
-              <div class="mb-3">
-                <label for="name-input" class="form-label">Nama Lengkap</label>
-                <input id="name-input" type="text" name="name" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+      <section class="register-section d-flex align-items-center justify-content-center min-vh-100" style="background: #f6ede5;">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10">
+              <div class="text-center mb-4">
+                <h1 class="fw-bold mb-2" style="font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 2.8rem;">NUTRITION INSIGHTS</h1>
+                <p class="text-muted" style="max-width: 600px; margin: 0 auto; font-size: 1.15rem;">Dive deep into the nutritional content of your meals, with detailed information on calories, macronutrients, vitamins, and minerals</p>
               </div>
-              <div class="mb-3">
-                <label for="email-input" class="form-label">Email</label>
-                <input id="email-input" type="email" name="email" class="form-control" placeholder="Contoh: nama@email.com" required>
+              <div class="row g-0 shadow-lg rounded-4 overflow-hidden bg-white" style="box-shadow: 0 8px 32px rgba(44, 39, 56, 0.12);">
+                <div class="col-md-6 d-flex flex-column align-items-center justify-content-center p-0 bg-white">
+                  <img src="/images/image-regist.jpg" alt="Nutrition Bowl" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; min-height: 100%; min-width: 100%;" />
+                </div>
+                <div class="col-md-6 p-5 bg-white d-flex flex-column justify-content-center" style="min-width: 380px; max-width: 480px;">
+                  <div class="mb-4 text-center">
+                    <h2 class="fw-bold mb-3" style="font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 2rem;">REGISTER</h2>
+                  </div>
+                  <form id="register-form">
+                    <div class="mb-3">
+                      <label for="name-input" class="form-label fw-semibold" style="letter-spacing: 1px;">USERNAME</label>
+                      <input id="name-input" type="text" name="name" class="form-control" placeholder="Enter your username" required style="font-size: 1.05rem; padding: 0.7rem 1rem;">
+                    </div>
+                    <div class="mb-3">
+                      <label for="email-input" class="form-label fw-semibold" style="letter-spacing: 1px;">EMAIL</label>
+                      <input id="email-input" type="email" name="email" class="form-control" placeholder="Enter your email" required style="font-size: 1.05rem; padding: 0.7rem 1rem;">
+                    </div>
+                    <div class="mb-4">
+                      <label for="password-input" class="form-label fw-semibold" style="letter-spacing: 1px;">PASSWORD</label>
+                      <input id="password-input" type="password" name="password" class="form-control" placeholder="Enter your password" required style="font-size: 1.05rem; padding: 0.7rem 1rem;">
+                    </div>
+                    <div id="submit-button-container" class="d-grid mb-3">
+                      <button class="btn fw-bold" type="submit" style="background: #6c4ba6; border: none; color: #fff; font-size: 1.1rem; padding: 0.7rem 0; border-radius: 8px;">REGISTER</button>
+                    </div>
+                    <p class="text-center mb-0" style="font-size: 1rem;">Have account? <a href="#/login" class="text-decoration-none" style="color: #6c4ba6; font-weight: 600;">Login here</a></p>
+                  </form>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="password-input" class="form-label">Password</label>
-                <input id="password-input" type="password" name="password" class="form-control" placeholder="Masukkan password baru" required>
-              </div>
-              <div id="submit-button-container" class="d-grid mb-3">
-                <button class="btn btn-success fw-bold" type="submit">Daftar Akun</button>
-              </div>
-              <p class="text-center mb-0">Sudah punya akun? <a href="#/login" class="text-decoration-none text-success fw-semibold">Masuk</a></p>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -42,7 +57,7 @@ export default class RegisterPage {
 
     this.#setupForm();
   }
- 
+
   #setupForm() {
     document
       .getElementById("register-form")
