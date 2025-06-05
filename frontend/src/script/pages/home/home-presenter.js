@@ -1,5 +1,5 @@
-import { fetchAllFeedback, postFeedback } from '../../data/api';
-import { getAccessToken } from '../../utils/auth';
+import { fetchAllFeedback, postFeedback } from "../../data/api";
+import { getAccessToken } from "../../utils/auth";
 
 export default class HomePresenter {
   constructor({ view }) {
@@ -7,13 +7,14 @@ export default class HomePresenter {
   }
 
   async loadFeedback() {
-    const token = getAccessToken(); 
+    const token = getAccessToken();
     if (!token) {
       this.view.showLoginMessage();
       return;
     }
     try {
       const data = await fetchAllFeedback(token);
+      // console.log('FEEDBACK RESPONSE:', data);
       this.view.showFeedbackList(data.feedback || []);
     } catch (e) {
       this.view.showFeedbackError();
@@ -27,7 +28,11 @@ export default class HomePresenter {
       return;
     }
     try {
-      await postFeedback(token, { message, rating });
+      const res = await postFeedback(token, { message, rating });
+      if (res.error) {
+        alert(res.error);
+        return;
+      }
       this.view.onFeedbackSubmitted();
     } catch (e) {
       this.view.showFeedbackError();

@@ -1,4 +1,5 @@
 import HomePresenter from "./home-presenter";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export default class HomeView {
   #presenter = null;
@@ -499,7 +500,7 @@ export default class HomeView {
 
       <h3 class="mb-4">Feedback Pengguna</h3>
       
-      <div class="mb-4" id="feedback-list">
+      <div class="mb-4" id="feedback-list" style="max-height: 300px; overflow-y: auto">
        
       </div>
       <button
@@ -579,7 +580,7 @@ export default class HomeView {
     let selectedRating = 0;
     stars.forEach((star) => {
       star.addEventListener("click", function () {
-        selectedRating = parseInt(this.dataset.value);
+        selectedRating = Number(this.dataset.value); // pastikan Number, bukan parseInt
         stars.forEach((s, idx) => {
           s.style.color = idx < selectedRating ? "orange" : "#ccc";
         });
@@ -622,23 +623,23 @@ export default class HomeView {
       feedbackListDiv.innerHTML = feedback
         .map(
           (fb) => `
-        <div class="card mx-auto mb-2" style="max-width: 500px">
-          <div class="card-body">
-            <p class="card-text mb-1">${fb.message}</p>
-            <div>
-              ${[...Array(5)]
-                .map(
-                  (_, i) =>
-                    `<span style="color:${
-                      i < fb.rating ? "orange" : "#ccc"
-                    }">&#9733;</span>`
-                )
-                .join("")}
-            </div>
-            <small class="text-muted">- ${fb.username}</small>
+      <div class="card mx-auto mb-2" style="max-width: 500px">
+        <div class="card-body">
+          <p class="card-text mb-1">${fb.message}</p>
+          <div>
+            ${[...Array(5)]
+              .map(
+                (_, i) =>
+                  `<span style="color:${
+                    i < fb.rating ? "orange" : "#ccc"
+                  }">&#9733;</span>`
+              )
+              .join("")}
           </div>
+          <small class="text-muted">- ${fb.users?.username || "-"}</small>
         </div>
-      `
+      </div>
+    `
         )
         .join("");
     }
@@ -653,17 +654,11 @@ export default class HomeView {
       document.querySelectorAll("#feedback-list")[1] ||
       document.getElementById("feedback-list");
     if (feedbackListDiv) {
-      feedbackListDiv.innerHTML = `<div class="alert alert-danger">Gagal memuat feedback.</div>`;
+      feedbackListDiv.innerHTML = `<div class="alert alert-danger" style="z-index :4;">Gagal memuat feedback.</div>`;
     }
   }
-
   onFeedbackSubmitted() {
-    Swal.fire({
-      title: "berhasil kirim feedback",
-      icon: "success",
-      draggable: true,
-    });
     window.location.reload();
+
   }
 }
-

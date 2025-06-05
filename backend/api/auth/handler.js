@@ -1,6 +1,6 @@
 const { registerUser, validateUser } = require("../../services/userService");
 const { generateToken } = require("../../utils/jwt");
-const { registerSchema } = require("./validator");
+const { registerSchema, loginSchema } = require("./validator");
 
 const registerHandler = async (request, h) => {
   try {
@@ -16,6 +16,9 @@ const registerHandler = async (request, h) => {
 
 const loginHandler = async (request, h) => {
   try {
+    const { error } = loginSchema.validate(request.payload);
+    if (error) return h.response({ error: error.message }).code(400);
+
     const user = await validateUser(request.payload);
     const token = generateToken({ id: user.id, username: user.username });
 

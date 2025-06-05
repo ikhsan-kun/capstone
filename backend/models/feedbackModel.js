@@ -4,7 +4,7 @@ const supabase = require('../config/db');
 const getAllFeedbackWithUser = async () => {
   const { data, error } = await supabase
     .from('feedback')
-    .select('id:feedback_id, message, rating, created_at, users(username)')
+    .select('id, message, rating, created_at, users(username)')
     .order('created_at', { ascending: false });
 
   if (error) throw error;

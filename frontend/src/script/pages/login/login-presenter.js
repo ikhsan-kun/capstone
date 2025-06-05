@@ -16,7 +16,7 @@ export default class LoginPresenter {
 
       if (response.error) {
         console.error('getLogin: response:', response);
-        this.#view.loginFailed(response.message);
+        this.#view.loginFailed(response.error || response.message);
         return;
       }
 
@@ -26,7 +26,7 @@ export default class LoginPresenter {
       this.#view.loginSuccessfully(response.message, response.loginResult);
     } catch (error) {
       console.error('getLogin: error:', error);
-      this.#view.loginFailed(error.message);
+      this.#view.loginFailed(response.error || response.message);
     } finally {
       this.#view.hideSubmitLoadingButton();
     }
