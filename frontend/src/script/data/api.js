@@ -5,7 +5,15 @@ const ENDPOINTS = {
   REGISTER: `${CONFIG.BASE_URL}/auth/register`,
   ADDFEEDBACK: `${CONFIG.BASE_URL}/feedback`,
   GETFEEDBACK: `${CONFIG.BASE_URL}/all/feedback`,
+  GETPROFILE: `${CONFIG.BASE_URL}/profile`,
 };
+
+export async function fetchProfile(token) {
+  const res = await fetch(ENDPOINTS.GETPROFILE, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return await res.json();
+}
 
 // Login user
 export async function loginUser(credentials) {

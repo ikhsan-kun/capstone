@@ -37,6 +37,16 @@ class App {
     let btn = document.getElementById("login");
     if (islogin){
       btn.innerHTML = logoutButtonTemplate();
+
+      const logoutBtn = btn.querySelector("#logout-btn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          import("../utils/auth").then(({ removeAccessToken }) => {
+            removeAccessToken();
+            location.hash = "/login";
+          });
+        });
+      }
     }else{
       btn.innerHTML = loginButtonTemplate();
     }

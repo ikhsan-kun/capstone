@@ -1,4 +1,4 @@
-const { registerHandler, loginHandler } = require('./handler');
+const { registerHandler, loginHandler, profileHandler } = require('./handler');
 
 const routes = [
   {
@@ -10,6 +10,12 @@ const routes = [
     method: 'POST',
     path: '/auth/login',
     handler: loginHandler,
+  },
+  {
+    method: 'GET',
+    path: '/profile',
+    handler: profileHandler,
+    options: { auth: 'jwt' }, 
   },
 ];
 

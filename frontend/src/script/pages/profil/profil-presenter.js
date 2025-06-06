@@ -1,3 +1,6 @@
+import { getAccessToken } from "../../utils/auth";
+import { fetchProfile } from "../../data/api";
+
 export default class ProfilePresenter {
   #view;
 
@@ -6,25 +9,18 @@ export default class ProfilePresenter {
   }
 
   async showProfile() {
-    // Dummy data, ganti dengan fetch dari backend jika sudah ada API
-    const history = [
-      {
-        date: new Date().toISOString().slice(0, 10),
-        food: "Nasi Goreng",
-        nutrition: { kalori: 350, protein: 8, lemak: 10, karbo: 60 }
-      },
-      {
-        date: new Date().toISOString().slice(0, 10),
-        food: "Ayam Bakar",
-        nutrition: { kalori: 250, protein: 20, lemak: 15, karbo: 5 }
-      },
-      {
-        date: "2025-05-31",
-        food: "Sate",
-        nutrition: { kalori: 200, protein: 12, lemak: 8, karbo: 10 }
+    const token = getAccessToken();
+    let username = "Nama Pengguna";
+    let email = "user@email.com";
+    try {
+      const res = await fetchProfile(token);
+      if (res.profile) {
+        username = res.profile.username;
+        email = res.profile.email;
       }
-    ];
-
-    await this.#view.showProfileContent(history);
+    } catch (e) {
+      // handle error, bisa tampilkan pesan error
+    }
+    await this.#view.showProfileContent([], username, email);
   }
 }

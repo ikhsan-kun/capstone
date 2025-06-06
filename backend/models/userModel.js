@@ -15,10 +15,22 @@ const findUserByEmail = async (email) => {
     .from('users')
     .select('*')
     .eq('email', email)
-    .single(); // karena hanya satu user yang boleh punya email tersebut
+    .single(); 
 
-  if (error) return null; // bisa juga lempar error jika ingin ketat
+  console.log('FIND USER:', { data, error }); // Tambahkan log ini
+
+  if (error) return null;
   return data;
 };
 
-module.exports = { createUser, findUserByEmail };
+const findUserById = async (id) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select('id, username, email')
+    .eq('id', id)
+    .single();
+  if (error) return { data: null, error };
+  return { data, error: null };
+};
+
+module.exports = { createUser, findUserByEmail, findUserById };

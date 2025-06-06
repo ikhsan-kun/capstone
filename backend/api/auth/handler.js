@@ -28,4 +28,15 @@ const loginHandler = async (request, h) => {
   }
 };
 
-module.exports = { registerHandler, loginHandler };
+const profileHandler = async (request, h) => {
+  try {
+    const userId = request.auth.credentials.id;
+    const { data, error } = await require('../../models/userModel').findUserById(userId);
+    if (error || !data) return h.response({ error: "User not found" }).code(404);
+    return h.response({ profile: { username: data.username, email: data.email } }).code(200);
+  } catch (err) {
+    return h.response({ error: err.message }).code(400);
+  }
+};
+
+module.exports = { registerHandler, loginHandler, profileHandler };
