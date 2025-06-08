@@ -3,6 +3,7 @@ const Jwt = require("@hapi/jwt"); // Tambahkan ini
 const authRoutes = require("./api/auth/routes");
 const historyRoutes = require("./api/history/routes");
 const feedbackRoutes = require("./api/feedback/routes");
+const nutritionRoutes = require("./api/nutrition/routes");
 
 require("dotenv").config();
 
@@ -30,6 +31,7 @@ const init = async () => {
 server.route(historyRoutes);
   server.route(feedbackRoutes);
   server.route(authRoutes);
+  server.route(nutritionRoutes);
 
   await server.start();
   console.log("Server running on %s", server.info.uri);

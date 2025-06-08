@@ -1,24 +1,26 @@
-import AnalyzerView from './Analyzer-view.js';
+import AnalyzerView from "./Analyzer-view.js";
+import { analyzeFoodImage } from "../../data/api.js";
 
 export default class AnalyzerPresenter {
-  constructor(container) {
-    this.view = new AnalyzerView(container, this);
+  constructor({ view }) {
+    this.view = view;
   }
 
-  start() {
-    this.view.render();
-  }
-
-  // Dummy: ganti dengan request ke backend jika sudah ada API
-  analyzeImage(imageDataUrl) {
-    // Simulasi hasil analisis
-    const nutrition = {
-      kalori: Math.floor(Math.random() * 50) + 50,
-      protein: Math.floor(Math.random() * 50) + 30,
-      lemak: Math.floor(Math.random() * 50) + 20,
-      karbo: Math.floor(Math.random() * 50) + 40,
-    };
-    this.view.showNutrition(nutrition);
-    this.view.showInfo('Analisis nutrisi di atas adalah contoh. Integrasikan dengan backend untuk hasil nyata.');
+  async analyzeImageFile(file, saveHistory = true) {
+    this.view.showInfo("Mengirim gambar ke server...");
+    const result = await analyzeFoodImage(file, saveHistory);
+    if (result.status === "success" && result.data && result.data.food) {
+      this.view.showFoodName(result.data.food);
+      this.view.showNutrition(result.data);
+      this.view.showInfo(
+        saveHistory
+          ? "Analisis berhasil dan tersimpan di riwayat Anda."
+          : "Analisis berhasil (tidak disimpan ke riwayat)."
+      );
+    } else {
+      this.view.showInfo(
+        "Gagal analisis: " + (result.message || "Data tidak valid")
+      );
+    }
   }
 }

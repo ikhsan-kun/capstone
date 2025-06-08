@@ -1,5 +1,5 @@
 import { getAccessToken } from "../../utils/auth";
-import { fetchProfile } from "../../data/api";
+import { fetchProfile, fetchUserHistory } from "../../data/api";
 
 export default class ProfilePresenter {
   #view;
@@ -12,15 +12,18 @@ export default class ProfilePresenter {
     const token = getAccessToken();
     let username = "Nama Pengguna";
     let email = "user@email.com";
+    let history = [];
     try {
       const res = await fetchProfile(token);
       if (res.profile) {
         username = res.profile.username;
         email = res.profile.email;
+        const historyRes = await fetchUserHistory();
+        if (historyRes.status === "success") {
+          history = historyRes.history;
+        }
       }
-    } catch (e) {
-      // handle error, bisa tampilkan pesan error
-    }
-    await this.#view.showProfileContent([], username, email);
+    } catch (e) {}
+    await this.#view.showProfileContent(history, username, email);
   }
 }

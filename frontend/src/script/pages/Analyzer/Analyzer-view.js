@@ -5,6 +5,11 @@ export default class AnalyzerView {
   #stream = null;
   #facingMode = "environment";
 
+  constructor(container, presenter) {
+    this.container = container;
+    this.#presenter = presenter;
+  }
+
   async render() {
     return `
       <div class="container py-5" style="min-height: 100vh;">
@@ -36,13 +41,15 @@ export default class AnalyzerView {
             <div id="nutrition-bars"></div>
           </div>
         </div>
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" id="saveHistorySwitch" checked>
+          <label class="form-check-label" for="saveHistorySwitch">Simpan ke Riwayat</label>
+        </div>
       </div>
     `;
   }
 
   async afterRender() {
-    this.#presenter = this;
-
     this.video = document.getElementById("video");
     this.canvas = document.getElementById("canvas");
     this.result = document.getElementById("result");
@@ -51,6 +58,8 @@ export default class AnalyzerView {
     this.switchCameraBtn = document.getElementById("switchCameraBtn");
     this.uploadInput = document.getElementById("uploadInput");
     this.openCameraBtn = document.getElementById("openCameraBtn");
+
+    this.#presenter = new AnalyzerPresenter({ view: this });
 
     // Kamera hanya aktif setelah tombol ditekan
     this.openCameraBtn.addEventListener("click", async () => {
@@ -74,6 +83,7 @@ export default class AnalyzerView {
     this.uploadInput.addEventListener("change", (e) => {
       this.handleUpload(e);
     });
+
   }
 
   async startCamera() {
@@ -102,19 +112,35 @@ export default class AnalyzerView {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    const nutrition = {
-      kalori: Math.floor(Math.random() * 50) + 50,
-      protein: Math.floor(Math.random() * 50) + 30,
-      lemak: Math.floor(Math.random() * 50) + 20,
-      karbo: Math.floor(Math.random() * 50) + 40,
-    };
-    this.showNutrition(nutrition);
-
     this.result.innerHTML = `
       <img src="${canvas.toDataURL(
         "image/png"
       )}" alt="Captured" class="img-fluid rounded mb-3" style="max-width: 300px; border: 2px solid orange;" />
     `;
+
+    const saveHistory = document.getElementById("saveHistorySwitch").checked;
+    // Kirim ke backend untuk analisis ML
+    this.#presenter.analyzeImageFile(
+      this.dataURLtoFile(canvas.toDataURL("image/png"), "capture.png"),
+      saveHistory
+    );
+  }
+
+  dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    // Deteksi ekstensi dari filename
+    let ext = filename.split(".").pop().toLowerCase();
+    let type = mime;
+    if (ext === "jpg" || ext === "jpeg") type = "image/jpeg";
+    if (ext === "png") type = "image/png";
+    return new File([u8arr], filename, { type });
   }
 
   handleUpload(e) {
@@ -130,20 +156,23 @@ export default class AnalyzerView {
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        const nutrition = {
-          kalori: Math.floor(Math.random() * 50) + 50,
-          protein: Math.floor(Math.random() * 50) + 30,
-          lemak: Math.floor(Math.random() * 50) + 20,
-          karbo: Math.floor(Math.random() * 50) + 40,
-        };
-        this.showNutrition(nutrition);
-
         this.result.innerHTML = `
           <img src="${canvas.toDataURL(
             "image/png"
           )}" alt="Uploaded" class="img-fluid rounded mb-3" style="max-width: 300px; border: 2px solid orange;" />
-          <div class="alert alert-info">Analisis nutrisi di atas adalah contoh. Integrasikan dengan backend untuk hasil nyata.</div>
         `;
+
+        const saveHistory =
+          document.getElementById("saveHistorySwitch").checked;
+        // Gunakan nama file asli agar tipe file benar
+        if (!this.#presenter || !this.#presenter.analyzeImageFile) {
+          alert("Presenter tidak terinisialisasi dengan benar!");
+          return;
+        }
+        this.#presenter.analyzeImageFile(
+          this.dataURLtoFile(canvas.toDataURL("image/png"), file.name),
+          saveHistory
+        );
       };
       img.src = event.target.result;
     };
@@ -171,6 +200,25 @@ export default class AnalyzerView {
     if (this.#stream) {
       this.#stream.getTracks().forEach((track) => track.stop());
       this.#stream = null;
+    }
+  }
+
+  showInfo(message) {
+    const resultDiv = this.result;
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+      <div class="alert alert-info" role="alert">
+        ${message}
+      </div>
+    `;
+    }
+  }
+  showFoodName(foodName) {
+    if (this.result) {
+      this.result.innerHTML =
+        `<div class="mb-2" style="font-size:1.2rem;font-weight:bold;">
+          Makanan terdeteksi: <span style="color:orange">${foodName}</span>
+        </div>` + this.result.innerHTML;
     }
   }
 }

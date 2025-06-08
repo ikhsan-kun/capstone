@@ -1,4 +1,4 @@
-const CONFIG = {
+ export const CONFIG = {
   BASE_URL: 'http://localhost:3000',
 };
 export const TOKEN_KEY = 'nutriai_token';
@@ -15,4 +15,3 @@ export function removeToken() {
   localStorage.removeItem(TOKEN_KEY);
 }
 
-export default CONFIG;
