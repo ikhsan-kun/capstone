@@ -331,7 +331,7 @@ export default class HomeView {
           style="font-size: 2rem; font-weight: bold; margin-bottom: 3rem"
           data-aos="fade-up"
         >
-          Manfaat yang di perhitungkan dari <br />
+          Manfaat yang Diperhitungkan dari <br />
           Setiap Makanan
         </h2>
         <div class="row justify-content-center g-4">
@@ -358,11 +358,10 @@ export default class HomeView {
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Keseimbangan Gizi</h5>
                     <p class="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
+                        Asupan seimbang antara karbohidrat, protein,
+                        dan lemak untuk tubuh yang optimal.
                     </p>
                   </div>
                 </div>
@@ -392,11 +391,9 @@ export default class HomeView {
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Pemberi Energi Sehat</h5>
                     <p class="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
+                          Mendukung aktivitas harian tanpa menyebabkan kelebihan kalori atau rasa lemas
                     </p>
                   </div>
                 </div>
@@ -426,11 +423,9 @@ export default class HomeView {
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Daya Tahan Tubuh</h5>
                     <p class="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
+                         Kaya vitamin, mineral, dan antioksidan untuk menjaga sistem imun tetap kuat.
                     </p>
                   </div>
                 </div>
@@ -460,11 +455,9 @@ export default class HomeView {
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Pencegahan Penyakit</h5>
                     <p class="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
+                      Nutrisi yang membantu menurunkan resiko penyakit kronis seperti diabetes dan jantung.
                     </p>
                   </div>
                 </div>
