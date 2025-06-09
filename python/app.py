@@ -63,7 +63,7 @@ def get_history(user_id: int):
                     "karbo": item["karbo"],
                 }
             }
-            for item in data
+            for item in data 
         ]
         return {"status": "success", "history": history}
     except Exception as e:

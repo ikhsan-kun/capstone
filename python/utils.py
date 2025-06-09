@@ -7,7 +7,6 @@ import re
 model = tf.keras.models.load_model("saved_model/model.h5")
 class_names = [
     "Ayam Geprek (1 potong) = 394 kkal (62% lemak, 12% karb, 27% prot)",
-    "Ayam Goreng (1 potong) = 391 kkal (50% lemak, 16% karb, 34% prot)",
     "Ayam Pop (1 potong) = 170 kkal (46% lemak, 11% karb, 43% prot)",
     "Ayam goreng (1 potong) = 391 kkal (50% lemak, 16% karb, 34% prot)",
     "Bakso (1 porsi) = 218 kkal (60% lemak, 15% karb, 25% prot)",
@@ -52,7 +51,7 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     return image
 
 # Prediction parser
-def parse_prediction_output(text):
+def parse_prediction_output(text): 
     try:
         food = re.search(r"^(.*?)\s*\(", text).group(1)
         kalori = int(re.search(r"=\s*(\d+)\s*kkal", text).group(1))
@@ -74,6 +73,7 @@ def parse_prediction_output(text):
 def predict(image: Image.Image) -> dict:
     processed = preprocess_image(image)
     result = model.predict(processed)
+    print("result : ", result)
     pred_idx = int(np.argmax(result, axis=1)[0])
     label = class_names[pred_idx]
     print("Predicted label:", label)

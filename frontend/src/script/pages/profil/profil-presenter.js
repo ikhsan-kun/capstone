@@ -18,12 +18,25 @@ export default class ProfilePresenter {
       if (res.profile) {
         username = res.profile.username;
         email = res.profile.email;
-        const historyRes = await fetchUserHistory();
-        if (historyRes.status === "success") {
-          history = historyRes.history;
-        }
       }
-    } catch (e) {}
-    await this.#view.showProfileContent(history, username, email);
+      // Ambil history user
+      const historyRes = await fetchUserHistory();
+      if (historyRes.history && Array.isArray(historyRes.history)) {
+        // Parsing agar sesuai format yang diharapkan showProfileContent
+        history = historyRes.history.map(item => ({
+          date: item.detected_at ? item.detected_at.slice(0, 10) : "",
+          food: item.food,
+          nutrition: {
+            kalori: Number(item.kalori),
+            protein: Number(item.protein),
+            lemak: Number(item.lemak),
+            karbo: Number(item.karbo),
+          }
+        }));
+      }
+    } catch (e) {
+      // Optional: tampilkan error
+    }
+    this.#view.showProfileContent(history, username, email);
   }
 }

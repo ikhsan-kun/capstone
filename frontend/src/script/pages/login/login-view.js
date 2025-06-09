@@ -1,12 +1,14 @@
 import LoginPresenter from "./login-presenter";
 import * as api from "../../data/api";
 import * as AuthModel from "../../utils/auth";
+import { removeAccessToken } from "../../utils/auth";
 
 export default class LoginPage {
   #presenter = null;
 
   async render() {
-  return `
+    removeAccessToken(); 
+    return `
     <section class="login-section d-flex align-items-center justify-content-center min-vh-100" style="background: #f6ede5;">
       <div class="container">
         <div class="row justify-content-center align-items-center">

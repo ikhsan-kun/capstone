@@ -44,8 +44,8 @@ export default class ProfileView {
       <div class="row g-4 mb-4">
         <!-- Profile Info -->
         <div class="col-md-4 text-center">
-          <div class="card border-0 shadow-sm p-4 rounded-4 h-100">
-            <img src="images/profile-default.png" alt="Profile" class="rounded-circle mb-3" style="width:100px;height:100px;object-fit:cover;">
+          <div class="card border-0 shadow-sm p-4 rounded-4 h-100 justify-content-center align-items-center">
+            <img src="images/profil.png" alt="Profile" class="rounded-circle mb-3" style="width:200px;height:200px;object-fit:cover;">
             <h4 class="fw-bold mb-1" style="color:#6c4ba6;">${username}</h4>
             <p class="text-muted mb-0">${email}</p>
           </div>

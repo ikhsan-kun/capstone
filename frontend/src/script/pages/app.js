@@ -1,9 +1,9 @@
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
-import {getAccessToken} from "../utils/auth";
+import { getAccessToken, removeAccessToken } from "../utils/auth";
 import { loginButtonTemplate, logoutButtonTemplate } from "../templates";
 
-let currentPage = null; 
+let currentPage = null;
 
 class App {
   #content = null;
@@ -16,7 +16,7 @@ class App {
     const url = getActiveRoute();
     const pageFactory = routes[url];
     const page = pageFactory ? pageFactory() : null;
-    
+
     if (currentPage && typeof currentPage.stopCamera === "function") {
       currentPage.stopCamera();
     }
@@ -35,22 +35,22 @@ class App {
 
     const islogin = getAccessToken();
     let btn = document.getElementById("login");
-    if (islogin){
+    if (islogin) {
       btn.innerHTML = logoutButtonTemplate();
 
       const logoutBtn = btn.querySelector("#logout-btn");
       if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-          import("../utils/auth").then(({ removeAccessToken }) => {
-            removeAccessToken();
+        logoutBtn.addEventListener("click", (e ) => {
+          e.preventDefault();
+          removeAccessToken();
+          setTimeout(() => {
             location.hash = "/login";
-          });
+          }, 1000); // delay 1000ms
         });
       }
-    }else{
+    } else {
       btn.innerHTML = loginButtonTemplate();
     }
-
 
     this.#content.classList.remove("show");
     this.#content.classList.add("fade-transition");

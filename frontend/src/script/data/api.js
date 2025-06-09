@@ -78,7 +78,10 @@ export async function analyzeFoodImage(file, saveHistory = true) {
 export async function fetchUserHistory() {
   const token = getAccessToken();
   const res = await fetch(`${CONFIG.BASE_URL}/history`, {
-    headers: { Authorization: `Bearer ${token}` },
+    method: 'GET',
+    headers: { 
+      Authorization: `Bearer ${token}` 
+    },
   });
   return await res.json();
 }

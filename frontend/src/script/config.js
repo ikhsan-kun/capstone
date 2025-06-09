@@ -1,5 +1,5 @@
  export const CONFIG = {
-  BASE_URL: 'http://localhost:3000',
+  BASE_URL: 'https://foodnutrition-be-production.up.railway.app',
 };
 export const TOKEN_KEY = 'nutriai_token';
 

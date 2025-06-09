@@ -31,6 +31,7 @@ export function putAccessToken(token) {
 export function removeAccessToken() {
   try {
     removeToken();
+    console.log("berhasil hapus token")
     return true;
   } catch (error) {
     console.error('removeAccessToken: error:', error);

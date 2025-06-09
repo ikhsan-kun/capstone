@@ -1,5 +1,5 @@
 const Hapi = require("@hapi/hapi");
-const Jwt = require("@hapi/jwt"); // Tambahkan ini
+const Jwt = require("@hapi/jwt"); 
 const authRoutes = require("./api/auth/routes");
 const historyRoutes = require("./api/history/routes");
 const feedbackRoutes = require("./api/feedback/routes");
