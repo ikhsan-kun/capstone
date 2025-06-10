@@ -107,14 +107,67 @@ export default class ProfileView {
                 .join("")}
             </div>
 
-            ${
-              warning
-                ? `
-              <div class="alert alert-danger mt-3 rounded-3 text-center fw-medium">
-                ⚠️ Konsumsi nutrisi Anda melebihi batas harian!
-              </div>`
-                : ""
-            }
+           
+${
+  warning
+    ? `
+      <div class="alert alert-danger mt-3 rounded-3 text-center fw-medium">
+        ⚠️ Konsumsi nutrisi Anda melebihi batas harian!
+      </div>
+      <div id="maskot-jeruk-fixed">
+        <img src="images/maskot-jeruk.png" alt="Maskot Jeruk" class="maskot-img">
+        <div class="maskot-cloud">
+          <div class="fw-semibold mb-1">Saran:</div>
+          <div style="font-size:0.95rem;">
+            Perhatikan asupan nutrisi harian Anda.<br>
+            <a href="https://www.halodoc.com/artikel/mengenal-pedoman-gizi-seimbang-dan-manfaat-untuk-kesehatan?srsltid=AfmBOoq7nXmZnpnyAdFOQmNLpYNnEVtrBQbsdeFEynuUrDvMiCUwx6r3" target="_blank" style="color:#6c4ba6;text-decoration:underline;">
+              Pentingnya Nutrisi & Kesehatan
+            </a>
+          </div>
+        </div>
+      </div>
+      <style>
+        #maskot-jeruk-fixed {
+          position: fixed;
+          right: 24px;
+          bottom: 24px;
+          z-index: 9999;
+          display: flex;
+          align-items: flex-end;
+          gap: 12px;
+          animation: maskot-pop 0.5s;
+        }
+        .maskot-img {
+          width: 80px;
+          height: 80px;
+          object-fit: contain;
+          filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+        }
+        .maskot-cloud {
+          background: #fffbe7;
+          border-radius: 24px 24px 24px 0;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+          padding: 16px 20px;
+          min-width: 210px;
+          max-width: 270px;
+          font-size: 1rem;
+          color: #6c4ba6;
+          border: 1.5px solid #fcb67d;
+        }
+        @keyframes maskot-pop {
+          from { transform: translateY(40px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 600px) {
+          #maskot-jeruk-fixed { right: 8px; bottom: 8px; }
+          .maskot-img { width: 56px; height: 56px; }
+          .maskot-cloud { min-width: 120px; padding: 10px 12px; font-size:0.92rem;}
+        }
+      </style>
+    `
+    : ""
+}
+
           </div>
         </div>
       </div>
@@ -138,19 +191,18 @@ export default class ProfileView {
                 </thead>
                 <tbody class="text-center">
                   ${history
+                    .slice(0, 10) // Hanya ambil 10 item pertama
                     .map(
-                      (item) => `
-                    <tr>
-                      <td>${item.date}</td>
-                      <td>${item.food}</td>
-                      <td>${item.nutrition.kalori}</td>
-                      <td>${item.nutrition.protein}</td>
-                      <td>${item.nutrition.lemak}</td>
-                      <td>${item.nutrition.karbo}</td>
+                    (item) => `
+                      <tr>
+                        <td>${item.date}</td>
+                        <td>${item.food}</td>
+                        <td>${item.nutrition.kalori}</td>
+                        <td>${item.nutrition.protein}</td>
+                        <td>${item.nutrition.lemak}</td>
+                        <td>${item.nutrition.karbo}</td>
                     </tr>
-                  `
-                    )
-                    .join("")}
+                    `).join("")}
                 </tbody>
               </table>
             </div>
