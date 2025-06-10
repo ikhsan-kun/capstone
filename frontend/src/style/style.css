@@ -1,5 +1,12 @@
 body {
   overflow-x: hidden;
+  padding-top: 70px; /* Atur sesuai tinggi navbar */
+}
+body.login-page {
+  padding-top: 0 !important;
+}
+body.regist-page {
+  padding-top: 0 !important;
 }
 .custom-btn:hover,
 .custom-btn:focus {
@@ -35,7 +42,7 @@ body {
   opacity: 1;
 }
 #result img {
-  box-shadow: 0 4px 16px rgba(255,140,0,0.15);
+  box-shadow: 0 4px 16px rgba(255, 140, 0, 0.15);
   border-radius: 1rem;
   max-width: 100%;
   height: auto;
@@ -59,7 +66,7 @@ body {
   transition: box-shadow 0.2s;
 }
 #feedback-list .card:hover {
-  box-shadow: 0 8px 32px rgba(255,152,0,0.15);
+  box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
 }
 #feedbackModal .star {
   transition: color 0.2s;
@@ -93,4 +100,21 @@ footer {
   background-color: #f1f1f1;
   border-radius: 1rem;
   overflow: hidden;
+}
+
+/* Navbar tetap di atas saat scroll */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.navbar.navbar-transparent {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none;
+}
+.navbar.scrolled {
+  background-color: rgb(248, 235, 211) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }

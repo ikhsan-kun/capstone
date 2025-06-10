@@ -5,6 +5,7 @@ export default class RegisterPage {
   #presenter = null;
 
   async render() {
+    document.body.classList.add('regist-page');
     return `
     <section class="register-section d-flex align-items-center justify-content-center min-vh-100 px-3" style="background: #f6ede5;">
       <div class="container">
@@ -40,9 +41,9 @@ export default class RegisterPage {
                       <input id="password-input" type="password" name="new-password" autocomplete="new-password" class="form-control" placeholder="Enter your password" required style="font-size: 1.05rem; padding: 0.7rem 1rem;">
                     </div>
                     <div id="submit-button-container" class="d-grid mb-3">
-                      <button class="btn fw-bold" type="submit" style="background: #6c4ba6; border: none; color: #fff; font-size: 1.1rem; padding: 0.7rem 0; border-radius: 8px;">REGISTER</button>
+                      <button class="btn fw-bold" type="submit" style="background: rgb(249, 145, 19); border: none; color: #fff; font-size: 1.1rem; padding: 0.7rem 0; border-radius: 8px;">REGISTER</button>
                     </div>
-                    <p class="text-center mb-0" style="font-size: 1rem;">Have account? <a href="#/login" class="text-decoration-none" style="color: #6c4ba6; font-weight: 600;">Login here</a></p>
+                    <p class="text-center mb-0" style="font-size: 1rem;">Have account? <a href="#/login" class="text-decoration-none" style="color: rgb(249, 145, 19); font-weight: 600;">Login here</a></p>
                   </form>
                 </div>
               </div>
