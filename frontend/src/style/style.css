@@ -34,3 +34,63 @@ body {
 .fade-transition.show {
   opacity: 1;
 }
+#result img {
+  box-shadow: 0 4px 16px rgba(255,140,0,0.15);
+  border-radius: 1rem;
+  max-width: 100%;
+  height: auto;
+}
+.progress {
+  background: #f3f3f3;
+}
+.progress-bar {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+@media (max-width: 600px) {
+  .card {
+    margin: 0 5px;
+  }
+}
+.card {
+  border-radius: 1rem !important;
+}
+#feedback-list .card {
+  transition: box-shadow 0.2s;
+}
+#feedback-list .card:hover {
+  box-shadow: 0 8px 32px rgba(255,152,0,0.15);
+}
+#feedbackModal .star {
+  transition: color 0.2s;
+}
+#feedbackModal .star:hover,
+#feedbackModal .star.selected {
+  color: #ff9800 !important;
+}
+footer {
+  letter-spacing: 0.5px;
+}
+.custom-btn {
+  transition: all 0.3s ease;
+}
+
+.btn-warning {
+  background-color: orange;
+  border: none;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background-color: #ff9800;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.progress {
+  background-color: #f1f1f1;
+  border-radius: 1rem;
+  overflow: hidden;
+}

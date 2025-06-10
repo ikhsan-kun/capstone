@@ -501,6 +501,7 @@ export default class HomeView {
         class="btn btn-outline-light rounded-5 custom-btn"
         data-bs-toggle="modal"
         data-bs-target="#feedbackModal"
+        style="margin-bottom:20px;"
       >
         Beri Feedback
       </button>
@@ -514,9 +515,9 @@ export default class HomeView {
       aria-hidden="true"
     >
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="border-radius:1.2rem;">
           <form>
-            <div class="modal-header">
+            <div class="modal-header" style="background:linear-gradient(90deg,#ff9800,#ffb74d);color:#fff;border-top-left-radius:1.2rem;border-top-right-radius:1.2rem;">
               <h5 class="modal-title" id="feedbackModalLabel">
                 Kirim Feedback Anda
               </h5>
@@ -525,6 +526,7 @@ export default class HomeView {
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Tutup"
+                style="filter:invert(1);"
               ></button>
             </div>
             <div class="modal-body">
@@ -535,34 +537,56 @@ export default class HomeView {
                   id="feedbackText"
                   rows="3"
                   required
+                  maxlength="200"
+                  placeholder="Tulis feedback Anda di sini (max 200 karakter)"
+                  style="resize:none;"
                 ></textarea>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Rating</label>
-                <div id="feedbackRating" class="d-flex gap-1">
+              <div class="mb-3 text-center">
+                <label class="form-label mb-2">Rating</label>
+                <div id="feedbackRating" class="d-flex justify-content-center gap-2 mb-2">
                   <!-- Bintang rating -->
-                  <span class="star" data-value="1">&#9733;</span>
-                  <span class="star" data-value="2">&#9733;</span>
-                  <span class="star" data-value="3">&#9733;</span>
-                  <span class="star" data-value="4">&#9733;</span>
-                  <span class="star" data-value="5">&#9733;</span>
+                  <span class="star" data-value="1" style="font-size:2rem;cursor:pointer;">&#9733;</span>
+                  <span class="star" data-value="2" style="font-size:2rem;cursor:pointer;">&#9733;</span>
+                  <span class="star" data-value="3" style="font-size:2rem;cursor:pointer;">&#9733;</span>
+                  <span class="star" data-value="4" style="font-size:2rem;cursor:pointer;">&#9733;</span>
+                  <span class="star" data-value="5" style="font-size:2rem;cursor:pointer;">&#9733;</span>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex flex-column gap-2">
+              <button
+                type="submit"
+                class="btn btn-warning w-100"
+                style="font-weight:bold;font-size:1.1rem; margin-bottom:5px;"
+              >
+                Kirim Feedback
+              </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-outline-secondary w-100"
                 data-bs-dismiss="modal"
               >
                 Batal
               </button>
-              <button type="submit" class="btn btn-primary">Kirim</button>
             </div>
           </form>
-        </div> 
+        </div>
       </div>
-    </div>`;
+    </div>
+    <footer class="container-fluid py-4 " style="background-color: #fff; border-top: 3px solid #ff9800;">
+  <div class="container text-center">
+    <div style="font-size: 1.25rem; font-weight: 600; color: #ff9800;">
+      Food Nutrition Analyzer &copy; <span id="year"></span>
+    </div>
+    <div style="font-size: 1rem; color: #555; margin-top: 4px;">
+      Made with <span style="color: #ff5722;">&#10084;</span> by <strong>capstone tim CC25-CF313</strong>
+    </div>
+    <div class="mt-3" style="font-size: 0.9rem; color: #999;">
+      All rights reserved. Empowering healthy choices through smart nutrition.
+    </div>
+  </div>
+</footer>`;
   }
   async afterRender() {
     this.#presenter = new HomePresenter({ view: this });
@@ -613,28 +637,39 @@ export default class HomeView {
       document.querySelectorAll("#feedback-list")[1] ||
       document.getElementById("feedback-list");
     if (feedbackListDiv) {
-      feedbackListDiv.innerHTML = feedback
-        .map(
-          (fb) => `
-      <div class="card mx-auto mb-2" style="max-width: 500px">
-        <div class="card-body">
-          <p class="card-text mb-1">${fb.message}</p>
-          <div>
-            ${[...Array(5)]
-              .map(
-                (_, i) =>
-                  `<span style="color:${
-                    i < fb.rating ? "orange" : "#ccc"
-                  }">&#9733;</span>`
-              )
-              .join("")}
+      feedbackListDiv.innerHTML = feedback.length
+        ? feedback
+            .map(
+              (fb) => `
+      <div class="card mx-auto mb-3 shadow-sm border-0" style="max-width: 500px; border-radius: 1rem;">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" style="width:48px;height:48px;font-size:1.6rem;">
+             <img src="images/profil.png" alt="Profile" class="rounded-circle"  style="width:48px;height:48px;">
+
           </div>
-          <small class="text-muted">- ${fb.users?.username || "-"}</small>
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center mb-1">
+              <strong class="me-2" style="color:#ff9800;">${fb.users?.username || "Anonim"}</strong>
+              <div>
+                ${[...Array(5)]
+                  .map(
+                    (_, i) =>
+                      `<span style="font-size:1.2rem;color:${
+                        i < fb.rating ? "#ffb300" : "#e0e0e0"
+                      }">&#9733;</span>`
+                  )
+                  .join("")}
+              </div>
+            </div>
+            <p class="card-text mb-0" style="font-size:1.05rem;">${fb.message}</p>
+            <small class="text-muted">${fb.created_at ? new Date(fb.created_at).toLocaleDateString() : ""}</small>
+          </div>
         </div>
       </div>
     `
-        )
-        .join("");
+            )
+            .join("")
+        : `<div class="alert alert-info">Belum ada feedback. Jadilah yang pertama!</div>`;
     }
     const btn = document.querySelector(
       'button[data-bs-target="#feedbackModal"]'

@@ -13,20 +13,34 @@ export default class ProfileView {
   }
 
   async render() {
-  return `
+    return `
     <div id="profile-content" style="background: linear-gradient(to bottom, #ffffff, #ffecd2, #fcb67d); min-height: 100vh; padding-top: 50px; padding-bottom: 50px;"></div>
   `;
-}
-
+  }
 
   async afterRender() {
+    // Pastikan render() sudah selesai dan elemen ada
+    document.getElementById("profile-content").innerHTML = `
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <div>Memuat profil...</div>
+    </div>
+  `;
     this.#presenter = new ProfilePresenter({ view: this });
     await this.#presenter.showProfile();
   }
+  async showProfileContent(
+    history = [],
+    username = "Nama Pengguna",
+    email = "user@email.com"
+  ) {
+    const profileContent = document.getElementById("profile-content");
+    if (!profileContent) return;
 
-  async showProfileContent(history = [], username = "Nama Pengguna", email = "user@email.com") {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = new Date().toLocaleDateString("en-CA"); // format: YYYY-MM-DD
+
     const todayHistory = history.filter((h) => h.date === today);
+
     const total = { kalori: 0, protein: 0, lemak: 0, karbo: 0 };
     todayHistory.forEach((item) => {
       total.kalori += item.nutrition.kalori;
@@ -35,11 +49,12 @@ export default class ProfileView {
       total.karbo += item.nutrition.karbo;
     });
 
+    // Warning jika ada yang melebihi kebutuhan harian
     const warning = Object.keys(this.dailyNeeds).some(
       (key) => total[key] > this.dailyNeeds[key]
     );
 
-    document.getElementById("profile-content").innerHTML = `
+    profileContent.innerHTML = `
     <div class="container py-5">
       <div class="row g-4 mb-4">
         <!-- Profile Info -->
@@ -72,7 +87,7 @@ export default class ProfileView {
                 .join("")}
             </div>
 
-            <h5 class="fw-bold mb-2" style="color:#6c4ba6;">Konsumsi Hari Ini</h5>
+            <h5 class="fw-bold mb-2" style="color:#6c4ba6;">Konsumsi Hari Ini : ${today}</h5>
             <div class="row row-cols-2 row-cols-md-4 g-2">
               ${Object.entries(total)
                 .map(

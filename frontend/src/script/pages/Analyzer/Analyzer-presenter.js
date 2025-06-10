@@ -7,7 +7,7 @@ export default class AnalyzerPresenter {
   }
 
   async analyzeImageFile(file, saveHistory = true) {
-    this.view.showInfo("Mengirim gambar ke server...");
+    this.view.showInfo("menganalisis gambar...");
     const result = await analyzeFoodImage(file, saveHistory);
     if (result.status === "success" && result.data && result.data.food) {
       this.view.showFoodName(result.data.food);
