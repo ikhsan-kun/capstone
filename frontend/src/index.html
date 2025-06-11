@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Nutrition Analysr</title>
-
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg" style="background-color: #fff">
+      <nav
+        class="navbar navbar-expand-lg fixed-top navbar-transparent"
+        style="background-color: #fff"
+      >
         <div class="container">
           <h3 class="navbar-brand">NutriAi</h3>
           <button
@@ -25,7 +27,9 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto gap-1">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#/">Home</a>
+                <a class="nav-link active" aria-current="page" href="#/"
+                  >Home</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#/profil">Profile</a>
@@ -33,15 +37,24 @@
               <li class="nav-item">
                 <a class="nav-link" href="#/analyzer">Analyze</a>
               </li>
-              <li class="nav-item" id="login">
-                
-              </li>
+              <li class="nav-item" id="login"></li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
     <main id="main-content"></main>
- 
+    <script>
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 30) {
+          navbar.classList.add("scrolled");
+          navbar.classList.remove("navbar-transparent");
+        } else {
+          navbar.classList.remove("scrolled");
+          navbar.classList.add("navbar-transparent");
+        }
+      });
+    </script>
   </body>
 </html>

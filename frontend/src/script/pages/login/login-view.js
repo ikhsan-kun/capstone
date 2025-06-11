@@ -7,7 +7,8 @@ export default class LoginPage {
   #presenter = null;
 
   async render() {
-    removeAccessToken(); 
+    removeAccessToken();
+    document.body.classList.add("login-page");
     return `
     <section class="login-section d-flex align-items-center justify-content-center min-vh-100" style="background: #f6ede5;">
       <div class="container">
@@ -35,11 +36,11 @@ export default class LoginPage {
                     <input id="password-input" type="password" name="current-password" autocomplete="current-password" class="form-control form-control-lg" placeholder="Masukkan password" required>
                   </div>
                   <div id="submit-button-container" class="d-grid mb-3">
-                    <button class="btn fw-bold" type="submit" style="background: #6c4ba6; border: none; color: #fff; font-size: 1.1rem; padding: 0.7rem 0; border-radius: 8px; transition: background 0.3s ease;">
+                    <button class="btn fw-bold" type="submit" style="background:rgb(249, 145, 19); border: none; color: #fff; font-size: 1.1rem; padding: 0.7rem 0; border-radius: 8px; transition: background 0.3s ease;">
                       Masuk
                     </button>
                   </div>
-                  <p class="text-center mb-0" style="font-size: 1rem;">Belum punya akun? <a href="#/register" class="text-decoration-none" style="color: #6c4ba6; font-weight: 600;">Daftar</a></p>
+                  <p class="text-center mb-0" style="font-size: 1rem;">Belum punya akun? <a href="#/register" class="text-decoration-none" style="color: rgb(249, 145, 19); font-weight: 600;">Daftar</a></p>
                 </form>
               </div>
             </div>
@@ -48,8 +49,7 @@ export default class LoginPage {
       </div>
     </section>
   `;
-}
-
+  }
 
   async afterRender() {
     this.#presenter = new LoginPresenter({
@@ -59,6 +59,11 @@ export default class LoginPage {
     });
 
     this.#setupForm();
+
+    // Hapus class login-page jika keluar dari halaman login
+    window.addEventListener("hashchange", () => {
+      document.body.classList.remove("login-page");
+    });
   }
 
   #setupForm() {
