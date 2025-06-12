@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Food Nutrition Analysr</title><script defer="defer" src="app.bundle.js"></script><link href="app.css" rel="stylesheet"></head><body><header><nav class="navbar navbar-expand-lg fixed-top navbar-transparent" style="background-color: #fff"><div class="container"><h3 class="navbar-brand">NutriAi</h3><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav ms-auto gap-1"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#/">Home</a></li><li class="nav-item"><a class="nav-link" href="#/profil">Profile</a></li><li class="nav-item"><a class="nav-link" href="#/analyzer">Analyze</a></li><li class="nav-item" id="login"></li></ul></div></div></nav></header><main id="main-content"></main><script>window.addEventListener("scroll", function () {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Food Nutrition Analysr</title><link rel="manifest" href="manifest.json"/><meta name="theme-color" content="#ff9800"/><script defer="defer" src="app.bundle.js"></script><link href="app.css" rel="stylesheet"></head><body><header><nav class="navbar navbar-expand-lg fixed-top navbar-transparent" style="background-color: #fff"><div class="container"><h3 class="navbar-brand">NutriAi</h3><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav ms-auto gap-1"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#/">Home</a></li><li class="nav-item"><a class="nav-link" href="#/profil">Profile</a></li><li class="nav-item"><a class="nav-link" href="#/analyzer">Analyze</a></li><li class="nav-item" id="login"></li></ul></div></div></nav></header><main id="main-content"></main><script>window.addEventListener("scroll", function () {
         const navbar = document.querySelector(".navbar");
         if (window.scrollY > 30) {
           navbar.classList.add("scrolled");
@@ -7,4 +7,8 @@
           navbar.classList.remove("scrolled");
           navbar.classList.add("navbar-transparent");
         }
-      });</script></body></html>
+      });</script><script>if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("service-worker.js");
+        });
+      }</script></body></html>

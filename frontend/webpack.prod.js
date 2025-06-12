@@ -32,4 +32,9 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
+  performance: {
+    maxAssetSize: 1048576, // 1 MiB
+    maxEntrypointSize: 1048576, // 1 MiB
+    hints: false, // Disable performance hints/warnings
+  },
 });
