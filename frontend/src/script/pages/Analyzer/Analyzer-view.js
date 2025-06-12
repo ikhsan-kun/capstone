@@ -48,13 +48,32 @@ export default class AnalyzerView {
       .rounded-pill {
         border-radius: 999px !important;
       }
+
+      .icon-animate {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 100px;
+        height: 100px;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
     `;
     document.head.appendChild(style);
   }
 
   async render() {
     return `
-      <div class="container py-5" style="min-height: 100vh; background-color: #fff; color: #333;">
+      <div class="container py-5" style="min-height: 100vh; background-color: #fff; color: #333; position: relative;">
+        <img src="images/icon jeruk.png" class="icon-animate" alt="Icon Jeruk" />
         <div class="row justify-content-center">
           <div class="col-md-10 text-center">
             <h1 class="mb-2" style="font-size: 2.7rem; font-weight: bold; color: orange;">Food Nutrition Analyzer</h1>
