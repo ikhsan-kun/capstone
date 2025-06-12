@@ -274,7 +274,7 @@ export default class AnalyzerView {
             <div class="col-12 mb-3">
               <label class="form-label fw-semibold">Kalori</label>
               <div class="progress" style="height: 22px;">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: ${kaloriPct}%;" aria-valuenow="${nutrition.kalori}" aria-valuemin="0" aria-valuemax="${maxKalori}">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: ${kaloriPct}%" aria-valuenow="${kaloriPct}" aria-valuemin="0" aria-valuemax="100">
                   ${nutrition.kalori} kkal
                 </div>
               </div>
@@ -283,8 +283,8 @@ export default class AnalyzerView {
             <div class="col-12 mb-3">
               <label class="form-label fw-semibold">Protein</label>
               <div class="progress" style="height: 22px;">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: ${proteinPct}%;" aria-valuenow="${nutrition.protein}" aria-valuemin="0" aria-valuemax="${maxProtein}">
-                  ${nutrition.protein} g
+                <div class="progress-bar bg-primary" role="progressbar" style="width: ${proteinPct}%" aria-valuenow="${proteinPct}" aria-valuemin="0" aria-valuemax="100">
+                  ${proteinPct.toFixed(0)}%
                 </div>
               </div>
             </div>
@@ -292,8 +292,8 @@ export default class AnalyzerView {
             <div class="col-12 mb-3">
               <label class="form-label fw-semibold">Karbohidrat</label>
               <div class="progress" style="height: 22px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: ${karboPct}%;" aria-valuenow="${nutrition.karbo}" aria-valuemin="0" aria-valuemax="${maxKarbo}">
-                  ${nutrition.karbo} g
+                <div class="progress-bar bg-success" role="progressbar" style="width: ${karboPct}%" aria-valuenow="${karboPct}" aria-valuemin="0" aria-valuemax="100">
+                  ${karboPct.toFixed(0)}%
                 </div>
               </div>
             </div>
@@ -301,8 +301,8 @@ export default class AnalyzerView {
             <div class="col-12 mb-3">
               <label class="form-label fw-semibold">Lemak</label>
               <div class="progress" style="height: 22px;">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: ${lemakPct}%;" aria-valuenow="${nutrition.lemak}" aria-valuemin="0" aria-valuemax="${maxLemak}">
-                  ${nutrition.lemak} g
+                <div class="progress-bar bg-danger" role="progressbar" style="width: ${lemakPct}%" aria-valuenow="${lemakPct}" aria-valuemin="0" aria-valuemax="100">
+                  ${lemakPct.toFixed(0)}%
                 </div>
               </div>
             </div>

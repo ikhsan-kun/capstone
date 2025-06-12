@@ -77,9 +77,9 @@ export default class ProfileView {
                 <div class="col">
                   <div class="text-center bg-light rounded py-2 px-1">
                     <div class="fw-semibold text-uppercase" style="font-size: 0.9rem;">${key}</div>
-                    <div style="font-size: 1rem;">${val} ${
-                    key === "kalori" ? "kkal" : "g"
-                  }</div>
+                    <div style="font-size: 1rem;">${
+                      key === "kalori" ? val + " kkal" : val + " %"
+                    }</div>
                   </div>
                 </div>
               `
@@ -97,9 +97,9 @@ export default class ProfileView {
                     val > this.dailyNeeds[key] ? "danger" : "success"
                   } bg-opacity-10 rounded py-2 px-1">
                     <div class="fw-semibold text-uppercase" style="font-size: 0.9rem;">${key}</div>
-                    <div style="font-size: 1rem;">${val} ${
-                    key === "kalori" ? "kkal" : "g"
-                  }</div>
+                    <div style="font-size: 1rem;">${
+                      key === "kalori" ? val + " kkal" : val + " %"
+                    }</div>
                   </div>
                 </div>
               `
@@ -193,7 +193,7 @@ ${
                   ${history
                     .slice(0, 10) // Hanya ambil 10 item pertama
                     .map(
-                    (item) => `
+                      (item) => `
                       <tr>
                         <td>${item.date}</td>
                         <td>${item.food}</td>
@@ -202,7 +202,9 @@ ${
                         <td>${item.nutrition.lemak}</td>
                         <td>${item.nutrition.karbo}</td>
                     </tr>
-                    `).join("")}
+                    `
+                    )
+                    .join("")}
                 </tbody>
               </table>
             </div>
