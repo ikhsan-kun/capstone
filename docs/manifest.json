@@ -8,8 +8,13 @@
   "description": "Aplikasi analisis nutrisi makanan berbasis AI.",
   "icons": [
     {
-      "src": "images/icon0.png",
+      "src": "images/profil.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/bottom-img0.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]

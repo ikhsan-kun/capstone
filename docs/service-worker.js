@@ -1,10 +1,1 @@
-self.addEventListener("install", (event) => {
-  self.skipWaiting();
-});
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then((response) => response || fetch(event.request))
-  );
-});
+self.addEventListener("install",(e=>{self.skipWaiting()})),self.addEventListener("fetch",(e=>{e.respondWith(caches.match(e.request).then((t=>t||fetch(e.request))))}));
