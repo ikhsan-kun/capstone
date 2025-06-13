@@ -1,5 +1,5 @@
 import HomePresenter from "./home-presenter";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+
 
 export default class HomeView {
   #presenter = null;
@@ -592,7 +592,7 @@ export default class HomeView {
     this.#presenter = new HomePresenter({ view: this });
     this.#presenter.loadFeedback();
 
-    // Bintang rating interaktif di modal
+   
     const stars = document.querySelectorAll("#feedbackRating .star");
     let selectedRating = 0;
     stars.forEach((star) => {

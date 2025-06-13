@@ -14,7 +14,7 @@ export default class HomePresenter {
     }
     try {
       const data = await fetchAllFeedback(token);
-      // console.log('FEEDBACK RESPONSE:', data);
+      console.log('FEEDBACK RESPONSE:', data);
       this.view.showFeedbackList(data.feedback || []);
     } catch (e) {
       this.view.showFeedbackError();

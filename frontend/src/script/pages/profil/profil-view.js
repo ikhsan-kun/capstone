@@ -32,7 +32,8 @@ export default class ProfileView {
   async showProfileContent(
     history = [],
     username = "Nama Pengguna",
-    email = "user@email.com"
+    email = "user@email.com",
+    totalToday = { kalori: 0, protein: 0, lemak: 0, karbo: 0 }
   ) {
     const profileContent = document.getElementById("profile-content");
     if (!profileContent) return;
@@ -49,7 +50,8 @@ export default class ProfileView {
       total.karbo += item.nutrition.karbo;
     });
 
-    // Warning jika ada yang melebihi kebutuhan harian
+  
+
     const warning = Object.keys(this.dailyNeeds).some(
       (key) => total[key] > this.dailyNeeds[key]
     );
