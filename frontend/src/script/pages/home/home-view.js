@@ -96,7 +96,7 @@ export default class HomeView {
               <img
                 src="images/image-20.png"
                 alt="image-20"
-                style="width: 50px; height: 80px"
+                style="width: 50px; height: 130px; position: absolute; right: 0;"
               />
             </div>
           </div>
@@ -176,11 +176,11 @@ export default class HomeView {
             class="col-lg-6 col-md-12 mb-4 mb-lg-0 text-center text-lg-start"
             data-aos="fade-right"
           >
-            <h2 style="font-size: 4rem; font-weight: bold; margin-bottom: 1rem">
+            <h2 style="font-size: 4rem; font-weight: bold; margin-bottom: 1rem" class="hero-title">
               Cutting-Edge <br />
               Nutrition Insights
             </h2>
-            <p style="font-size: 1rem; max-width: 450px; margin: 0 auto 0 0">
+            <p style="font-size: 1rem; max-width: 450px; margin: 0 0 0 0">
               Our state-of-the-art machine learning algorithms analyze the
               composition of your food with unparalleled accuracy. Get detailed
               breakdowns of macronutrients, micronutrients, and potential
@@ -221,7 +221,7 @@ export default class HomeView {
       <div class="container text-center">
         <div class="row text-center" data-aos="fade-up" data-aos-delay="300">
           <h4 style="font-weight: bold">KNOW MORE ABOUT LIFE!</h4>
-          <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem">
+          <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem" class="hero-title">
             Personalisasi Gaya Hidup
           </h1>
           <p style="font-size: 1rem; max-width: 600px; margin: 0 auto">
@@ -305,11 +305,12 @@ export default class HomeView {
           alt=""
           srcset=""
           width="50px"
+          class="leaf-responsive"
           style="
             position: absolute;
             top: 0;
             left: 100px;
-            z-index: 2;
+         
             transform: rotate(180deg);
           "
         />
@@ -317,18 +318,19 @@ export default class HomeView {
           src="images/relative0.png"
           alt=""
           srcset=""
+          class="leaf-responsive"
           width="50px"
           style="
             position: absolute;
             top: 3rem;
             right: 100px;
-            z-index: 2;
+          
             transform: rotate(90deg);
           "
         />
 
         <h2
-          style="font-size: 2rem; font-weight: bold; margin-bottom: 3rem"
+          style="font-size: 2rem; font-weight: bold; margin-bottom: 3rem; z-index: 4;"
           data-aos="fade-up"
         >
           Manfaat yang Diperhitungkan dari <br />
@@ -481,6 +483,7 @@ export default class HomeView {
         alt=""
         srcset=""
         width="150px"
+        class="footer-bottom-img"
         style="position: absolute; bottom: 0; right: 0; z-index: 2"
       />
       <img
@@ -488,6 +491,7 @@ export default class HomeView {
         alt=""
         srcset=""
         width="50px"
+        class="footer-relative-img"
         style="position: absolute; top: -20px; left: 20px; z-index: 2"
       />
 
@@ -641,32 +645,31 @@ export default class HomeView {
         ? feedback
             .map(
               (fb) => `
-      <div class="card mx-auto mb-3 shadow-sm border-0" style="max-width: 500px; border-radius: 1rem;">
-        <div class="card-body d-flex align-items-center gap-3">
-          <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" style="width:48px;height:48px;font-size:1.6rem;">
-             <img src="images/profil.png" alt="Profile" class="rounded-circle"  style="width:48px;height:48px;">
-
-          </div>
-          <div class="flex-grow-1">
-            <div class="d-flex align-items-center mb-1">
-              <strong class="me-2" style="color:#ff9800;">${fb.users?.username || "Anonim"}</strong>
-              <div>
-                ${[...Array(5)]
-                  .map(
-                    (_, i) =>
-                      `<span style="font-size:1.2rem;color:${
-                        i < fb.rating ? "#ffb300" : "#e0e0e0"
-                      }">&#9733;</span>`
-                  )
-                  .join("")}
-              </div>
-            </div>
-            <p class="card-text mb-0" style="font-size:1.05rem;">${fb.message}</p>
-            <small class="text-muted">${fb.created_at ? new Date(fb.created_at).toLocaleDateString() : ""}</small>
+  <div class="card mb-3 shadow-sm border-0 mx-auto feedback-card-responsive" style="border-radius: 1rem;">
+    <div class="card-body d-flex align-items-center gap-3">
+      <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" style="width:48px;height:48px;font-size:1.6rem;">
+         <img src="images/profil.png" alt="Profile" class="rounded-circle"  style="width:48px;height:48px;">
+      </div>
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center mb-1">
+          <strong class="me-2" style="color:#ff9800;">${fb.users?.username || "Anonim"}</strong>
+          <div>
+            ${[...Array(5)]
+              .map(
+                (_, i) =>
+                  `<span style="font-size:1.2rem;color:${
+                    i < fb.rating ? "#ffb300" : "#e0e0e0"
+                  }">&#9733;</span>`
+              )
+              .join("")}
           </div>
         </div>
+        <p class="card-text mb-0" style="font-size:1.05rem;">${fb.message}</p>
+        <small class="text-muted">${fb.created_at ? new Date(fb.created_at).toLocaleDateString() : ""}</small>
       </div>
-    `
+    </div>
+  </div>
+`
             )
             .join("")
         : `<div class="alert alert-info">Belum ada feedback. Jadilah yang pertama!</div>`;
